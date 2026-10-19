@@ -1,7 +1,10 @@
-// Autopilot (experimental) — mantém o agente a trabalhar durante um orçamento de tempo.
-// Ativar: /autopilot [min]  (ou: bash scripts/autopilot.sh start 120)
-// Parar:  /autopilot-stop · scripts/autopilot.sh stop "motivo" · ficheiro STOP · Esc/erro
-// Só atua se .opencode/autopilot.state existir com active=1. Ignora sub-sessões.
+// Autopilot (experimental) — keeps the agent working for a time budget.
+// Start:  /autopilot [min]  (or: bash scripts/autopilot.sh start 120)
+// Stop:   /autopilot-stop · scripts/autopilot.sh stop "reason" · a STOP file in the root · Esc/error
+// Only acts while .opencode/autopilot.state exists with active=1. Ignores child sessions.
+//
+// OpenCode plugin API V2: see https://opencode.ai/v2/docs/build/plugins
+import { Plugin } from "@opencode/plugin"
 import { existsSync, readFileSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
 
@@ -23,108 +26,132 @@ function writeState(dir, st) {
   writeFileSync(join(dir, STATE), body)
 }
 
-export const Autopilot = async ({ client, directory }) => {
-  let lastPromptAt = 0
+// The event envelope differs across event kinds; read the payload defensively.
+const payload = (event) => event?.data ?? event?.properties ?? {}
 
-  const log = async (level, message) => {
-    try {
-      await client.app.log({ body: { service: "autopilot", level, message } })
-    } catch {
-      // ignorar
-    }
-  }
-
-  const deactivate = async (st, reason) => {
-    st.active = "0"
-    st.reason = reason
-    writeState(directory, st)
-    await log("info", `Autopilot parado: ${reason}`)
-  }
-
-  const send = (sessionID, text) => {
-    const body = { parts: [{ type: "text", text }] }
-    const fn = client.session.promptAsync ?? client.session.prompt
-    // fire-and-forget: não bloquear o loop de eventos
-    Promise.resolve(fn.call(client.session, { path: { id: sessionID }, body })).catch((e) =>
-      log("error", `Falha a enviar prompt: ${String(e)}`),
-    )
-  }
-
-  return {
-    event: async ({ event }) => {
-      const st = readState(directory)
-      if (!st || st.active !== "1") return
-
-      // Erro ou interrupção (Esc) → parar de propósito
-      if (event.type === "session.error") {
-        await deactivate(st, "erro ou interrupção")
-        return
-      }
-      if (event.type !== "session.idle") return
-
-      const sessionID = event.properties?.sessionID
-      if (!sessionID) return
-
-      // ignorar sub-sessões (subagentes) e outras sessões
-      try {
-        const s = await client.session.get({ path: { id: sessionID } })
-        if (s?.data?.parentID) return
-      } catch {
-        // se não conseguir verificar, segue
-      }
-      if (st.session && st.session !== sessionID) return
-      if (!st.session) st.session = sessionID
-
-      if (Date.now() - lastPromptAt < 3000) return
-
-      if (existsSync(join(directory, "STOP"))) {
-        await deactivate(st, "ficheiro STOP encontrado")
-        return
-      }
-
-      const start = Number(st.start) || Date.now() / 1000
-      const budget = Number(st.budget_min) || 120
-      const count = Number(st.count) || 0
-      const max = Number(st.max) || 60
-      const elapsed = Math.floor((Date.now() / 1000 - start) / 60)
-      const remaining = budget - elapsed
-
-      // já pedimos wrap-up e a sessão ficou idle outra vez → terminar
-      if (st.wrapup === "1") {
-        await deactivate(st, "orçamento esgotado (wrap-up feito)")
-        return
-      }
-
-      if (count >= max) {
-        await deactivate(st, `limite de ${max} iterações`)
-        return
-      }
-
-      lastPromptAt = Date.now()
-
-      if (remaining <= 0) {
-        st.wrapup = "1"
-        st.count = String(count + 1)
-        writeState(directory, st)
-        send(
-          sessionID,
-          `[AUTOPILOT] Orçamento de ${budget} min esgotado (decorridos ${elapsed} min). ` +
-            `Termina o que está a meio, corre scripts/check.sh, atualiza TODO.md/PROGRESS.md, faz commit e ` +
-            `escreve o resumo final (skill session-handoff). Depois corre: bash scripts/autopilot.sh stop "orçamento esgotado".`,
-        )
-        return
-      }
-
-      st.count = String(count + 1)
-      writeState(directory, st)
-      send(
-        sessionID,
-        `[AUTOPILOT ${count + 1}/${max}] Decorridos ${elapsed} min, restam ~${remaining} min. ` +
-          `Continua o loop de trabalho (AGENTS.md §4): relê PROGRESS.md/TODO.md/QUESTIONS.md, escolhe a próxima tarefa e executa-a. ` +
-          `Não peças confirmações. Se tiveres dúvidas, aplica os 5 ângulos (skill decide-without-asking) e decide. ` +
-          `Se a fila acabou, segue AGENTS.md §4.4. Se estiveres mesmo bloqueado em tudo, regista em QUESTIONS.md e corre ` +
-          `bash scripts/autopilot.sh stop "motivo". Se já não há trabalho útil: bash scripts/autopilot.sh stop "concluído".`,
-      )
-    },
-  }
+// Idle: `session.status` (current) or the deprecated `session.idle` (older builds).
+function isIdle(event) {
+  if (event?.type === "session.idle") return true
+  return event?.type === "session.status" && payload(event)?.status?.type === "idle"
 }
+
+// Failure or interrupt of a run: stop on purpose instead of retrying blindly.
+function isStop(event) {
+  return (
+    event?.type === "session.execution.failed" ||
+    event?.type === "session.execution.interrupted" ||
+    event?.type === "session.error" // legacy fallback
+  )
+}
+
+export default Plugin.define({
+  id: "autopilot",
+  async setup(ctx) {
+    const directory = ctx.location.directory
+    let lastPromptAt = 0
+
+    const log = (level, message) => {
+      const line = `[autopilot] ${message}`
+      if (level === "error") console.error(line)
+      else console.log(line)
+    }
+
+    const deactivate = (st, reason) => {
+      st.active = "0"
+      st.reason = reason
+      writeState(directory, st)
+      log("info", `stopped: ${reason}`)
+    }
+
+    const send = (sessionID, text) => {
+      // fire-and-forget: never block the event loop
+      void Promise.resolve(ctx.session.prompt({ sessionID, text })).catch((e) =>
+        log("error", `failed to send prompt: ${String(e)}`),
+      )
+    }
+
+    const controller = new AbortController()
+    void (async () => {
+      try {
+        for await (const event of ctx.event.subscribe({ signal: controller.signal })) {
+          const st = readState(directory)
+          if (!st || st.active !== "1") continue
+
+          if (isStop(event)) {
+            deactivate(st, "error or interruption")
+            continue
+          }
+          if (!isIdle(event)) continue
+
+          const sessionID = payload(event)?.sessionID
+          if (!sessionID) continue
+
+          // ignore child sessions (subagents) and unrelated sessions
+          try {
+            const s = await ctx.session.get({ sessionID })
+            if (s?.parentID) continue
+          } catch {
+            // if it cannot be verified, carry on
+          }
+          if (st.session && st.session !== sessionID) continue
+          if (!st.session) st.session = sessionID
+
+          if (Date.now() - lastPromptAt < 3000) continue
+
+          if (existsSync(join(directory, "STOP"))) {
+            deactivate(st, "STOP file found")
+            continue
+          }
+
+          const start = Number(st.start) || Date.now() / 1000
+          const budget = Number(st.budget_min) || 120
+          const count = Number(st.count) || 0
+          const max = Number(st.max) || 60
+          const elapsed = Math.floor((Date.now() / 1000 - start) / 60)
+          const remaining = budget - elapsed
+
+          // we already asked for a wrap-up and the session went idle again → finish
+          if (st.wrapup === "1") {
+            deactivate(st, "budget spent (wrap-up done)")
+            continue
+          }
+
+          if (count >= max) {
+            deactivate(st, `iteration limit of ${max}`)
+            continue
+          }
+
+          lastPromptAt = Date.now()
+
+          if (remaining <= 0) {
+            st.wrapup = "1"
+            st.count = String(count + 1)
+            writeState(directory, st)
+            send(
+              sessionID,
+              `[AUTOPILOT] Budget of ${budget} min spent (${elapsed} min elapsed). ` +
+                `Finish what is in progress, run scripts/check.sh, update TODO.md/PROGRESS.md, commit, and ` +
+                `write the final summary (skill session-handoff). Then run: bash scripts/autopilot.sh stop "budget spent".`,
+            )
+            continue
+          }
+
+          st.count = String(count + 1)
+          writeState(directory, st)
+          send(
+            sessionID,
+            `[AUTOPILOT ${count + 1}/${max}] ${elapsed} min elapsed, ~${remaining} min left. ` +
+              `Continue the work loop (AGENTS.md §4): re-read PROGRESS.md/TODO.md/QUESTIONS.md, pick the next task and do it. ` +
+              `Do not ask for confirmations. If in doubt, apply the 5 angles (skill decide-without-asking) and decide. ` +
+              `If the queue is empty, follow AGENTS.md §4.4. If you are truly blocked on everything, record it in QUESTIONS.md and run ` +
+              `bash scripts/autopilot.sh stop "reason". If there is no useful work left: bash scripts/autopilot.sh stop "done".`,
+          )
+        }
+      } catch {
+        // the event stream ended or was aborted during unload
+      }
+    })()
+
+    return () => controller.abort()
+  },
+})
