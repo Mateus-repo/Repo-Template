@@ -2,64 +2,64 @@
 
 {{DESCRIPTION}}
 
-> **Estado:** em desenvolvimento · **Stack:** {{STACK}} · **Criado em:** {{DATE}}
+> **Status:** in progress · **Stack:** {{STACK}} · **Created:** {{DATE}}
 
-## O que faz
+## What it does
 
-<!-- 2–4 frases: problema que resolve e para quem. Preencher com /bootstrap. -->
+<!-- 2–4 sentences: the problem it solves and for whom. Fill in with /bootstrap. -->
 
-## Funcionalidades
+## Features
 
-- [ ] _a preencher_
+- [ ] _to be filled in_
 
-## Começar
+## Getting started
 
 ```bash
-# 1. Instalar dependências
+# 1. Install dependencies
 # TODO
 
-# 2. Correr
+# 2. Run
 # TODO
 
-# 3. Testes
+# 3. Tests
 # TODO
 ```
 
-## Estrutura do repositório
+## Repository structure
 
 ```
 .
-├── AGENTS.md          # regras para agentes de IA
-├── ROADMAP.md         # visão e milestones
-├── TODO.md            # fila de tarefas
-├── PROGRESS.md        # estado atual e diário de sessões
-├── DECISIONS.md       # decisões técnicas
-├── QUESTIONS.md       # perguntas ao utilizador
-├── BUGS.md            # bugs conhecidos
-├── REVIEW.md          # auto-revisões
-├── IDEAS.md           # ideias fora de escopo
-├── ARCHITECTURE.md    # arquitetura
-├── CHANGELOG.md       # histórico de versões
-├── docs/              # convenções, testes, design, glossário, catálogo de módulos (MODULES.md)
-├── scripts/           # utilitários (check, commit, autopilot…)
-├── .opencode/         # skills, comandos, agentes e plugins do OpenCode
-└── src/               # código (a criar)
+├── AGENTS.md          # rules for AI agents
+├── ROADMAP.md         # vision and milestones
+├── TODO.md            # task queue
+├── PROGRESS.md        # current state and session log
+├── DECISIONS.md       # technical decisions
+├── QUESTIONS.md       # questions for the user
+├── BUGS.md            # known bugs
+├── REVIEW.md          # self-reviews
+├── IDEAS.md           # out-of-scope ideas
+├── ARCHITECTURE.md    # architecture
+├── CHANGELOG.md       # version history
+├── docs/              # conventions, testing, design, glossary, module catalog (MODULES.md)
+├── scripts/           # utilities (check, commit, autopilot…)
+├── .opencode/         # OpenCode skills, commands, agents and plugins
+└── src/               # code (to be created)
 ```
 
-## Desenvolvimento com OpenCode
+## Development with OpenCode
 
 ```bash
-opencode            # abrir na raiz do repo
-/bootstrap          # (1ª vez) preencher docs e comandos do projeto
-/autopilot 120      # trabalho autónomo durante ~2h
+opencode            # open at the repo root
+/bootstrap          # (first time) fill in the docs and the project commands
+/autopilot 120      # autonomous work for ~2h
 ```
 
-Ver `docs/TEMPLATE_GUIDE.md` para o guia completo do fluxo de trabalho.
+See `docs/TEMPLATE_GUIDE.md` for the full workflow guide.
 
-## Contribuir
+## Contributing
 
-Commits em [Conventional Commits](https://www.conventionalcommits.org/). Antes de submeter: `bash scripts/check.sh`.
+Commits follow [Conventional Commits](https://www.conventionalcommits.org/). Before submitting: `bash scripts/check.sh`.
 
-## Licença
+## License
 
-_A definir._
+_To be defined._

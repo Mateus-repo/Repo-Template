@@ -1,10 +1,10 @@
 ---
-description: Trabalho autónomo longo (omissão 120 min) — só pára em bloqueios reais
+description: Long autonomous work (default 120 min) — only stops on real blockers
 ---
-Ativa o autopilot e começa a trabalhar.
+Enable the autopilot and start working.
 
-1. Corre: `bash scripts/autopilot.sh start $ARGUMENTS` (sem argumento = 120 minutos).
-2. Segue a skill `autonomous-workflow` e o protocolo de `AGENTS.md` §4 do início ao fim.
-3. Não peças confirmações. Dúvidas → 5 ângulos (`decide-without-asking`) → decide e regista em `DECISIONS.md`.
-4. Faz commit por unidade lógica e checkpoint de `PROGRESS.md` a cada ~25 min (usa `bash scripts/clock.sh` para veres o tempo).
-5. Quando acabar o trabalho útil, ficares bloqueado em tudo ou o tempo esgotar: `bash scripts/autopilot.sh stop "motivo"` e escreve o resumo final.
+1. Run: `bash scripts/autopilot.sh start $ARGUMENTS` (no argument = 120 minutes).
+2. Follow the skill `autonomous-workflow` and the protocol in `AGENTS.md` §4 from beginning to end.
+3. Don't ask for confirmations. Doubts → 5 angles (`decide-without-asking`) → decide and register it in `DECISIONS.md`.
+4. Commit per logical unit and checkpoint `PROGRESS.md` every ~25 min (use `bash scripts/clock.sh` to see the time).
+5. When the useful work runs out, you're blocked on everything, or time runs out: `bash scripts/autopilot.sh stop "reason"` and write the final summary.

@@ -1,26 +1,26 @@
 # QUESTIONS — {{PROJECT_NAME}}
 
-> Perguntas ao **utilizador**. Só entram aqui **bloqueios reais** (ver `AGENTS.md` §4.3) — depois de analisados os 5 ângulos.
-> O agente pergunta **em lote**, dá uma **recomendação por defeito** e continua a trabalhar no que não depende da resposta.
-> **Utilizador:** responde por baixo de `Resposta:` (basta uma linha). O agente lê no arranque.
+> Questions for the **user**. Only **(real) blockers** go here (see `AGENTS.md` §4.3) — after the 5 angles have been analysed.
+> The agent asks **in batches**, gives a **default recommendation** and keeps working on what does not depend on the answer.
+> **User:** reply under `Answer:` (one line is enough). The agent reads them at startup.
 
-## Modelo
+## Template
 
 ```
-### Q-NNN — Pergunta curta  (AAAA-MM-DD) — Prioridade: alta/média/baixa
-- **Contexto:** porque é que isto importa.
-- **Já tentei (5 ângulos):** precedente: … · intenção: … · evidência: … · risco: … · simplicidade: …
-- **Opções:** A) … B) …
-- **Recomendação por defeito:** A, porque …  (é o que farei se não houver resposta)
-- **Bloqueia:** T-00X (ou "nada, só afina")
-- **Entretanto:** o que vou fazer.
-- **Resposta:** (utilizador)
+### Q-NNN — Short question  (YYYY-MM-DD) — Priority: high/medium/low
+- **Context:** why this matters.
+- **Already tried (5 angles):** precedent: … · intent: … · evidence: … · risk: … · simplicity: …
+- **Options:** A) … B) …
+- **Default recommendation:** A, because …  (this is what I will do if there is no answer)
+- **Blocks:** T-00X (or "nothing, just fine-tuning")
+- **Meanwhile:** what I will do.
+- **Answer:** (user)
 ```
 
-## Abertas
+## Open
 
-_Nenhuma._
+_None._
 
-## Respondidas
+## Answered
 
-_Nenhuma._
+_None._

@@ -1,53 +1,53 @@
 ---
 name: testing-verification
-description: Provar que o trabalho está realmente feito — escrever testes, correr scripts/check.sh, definir verificação manual reprodutível e aplicar a Definition of Done. Usa SEMPRE antes de marcar uma tarefa como concluída, depois de corrigir um bug, ao adicionar lógica não-trivial, quando não existirem testes, ou quando algo "parece funcionar". Nada está feito sem evidência.
+description: Prove the work is really done — write tests, run scripts/check.sh, define reproducible manual verification, and apply the Definition of Done. ALWAYS use before marking a task as complete, after fixing a bug, when adding non-trivial logic, when no tests exist, or when something "seems to work". Nothing is done without evidence.
 ---
 
 # Testing & verification
 
-> "Acho que funciona" ≠ "verifiquei que funciona".
+> "I think it works" ≠ "I verified that it works".
 
-## Definition of Done (resumo)
+## Definition of Done (summary)
 
-Critério de aceitação cumprido **com evidência** · `bash scripts/check.sh` verde · testes novos/atualizados · docs afetados atualizados · `TODO`/`PROGRESS` atualizados · commit feito · regressões conhecidas registadas em `BUGS.md`.
+Acceptance criterion met **with evidence** · `bash scripts/check.sh` green · new/updated tests · affected docs updated · `TODO`/`PROGRESS` updated · commit made · known regressions recorded in `BUGS.md`.
 
-## Ciclo
+## Cycle
 
-1. **Antes de codar:** relê o critério de aceitação. Como o vou provar? Escreve isso primeiro (teste, ou passos manuais).
-2. **Teste primeiro quando possível** — sobretudo em bugs: reproduz com um teste que **falha**, corrige, vê-o passar (regressão garantida).
-3. **Implementa** o mínimo para passar.
-4. **Corre** `bash scripts/check.sh` (e o teste específico).
-5. **Verifica o comportamento real** — corre a aplicação/comando/ecrã, não só os testes. Testes verdes com a app a falhar acontece.
-6. **Regista a evidência** em `PROGRESS.md` (nº de testes, comando manual, output relevante).
+1. **Before coding:** reread the acceptance criterion. How will I prove it? Write that down first (a test, or manual steps).
+2. **Test first when possible** — especially for bugs: reproduce with a test that **fails**, fix it, watch it pass (regression guaranteed).
+3. **Implement** the minimum to pass.
+4. **Run** `bash scripts/check.sh` (and the specific test).
+5. **Verify real behavior** — run the app/command/screen, not just the tests. Green tests with a broken app happen.
+6. **Record the evidence** in `PROGRESS.md` (number of tests, manual command, relevant output).
 
-## Que testes escrever
+## What tests to write
 
-| Tipo | Quando | Características |
+| Type | When | Characteristics |
 |------|--------|-----------------|
-| Unitário | lógica pura, regras, parsing, cálculos | rápido, sem I/O, muitos |
-| Integração | módulos juntos, BD, ficheiros, API própria | alguns, isolados, dados de teste |
-| Ponta-a-ponta | fluxos críticos do utilizador | poucos, estáveis |
-| Regressão | cada bug corrigido | nomeia o bug (`test_B004_empty_config`) |
+| Unit | pure logic, rules, parsing, calculations | fast, no I/O, many |
+| Integration | modules together, DB, files, own API | a few, isolated, test data |
+| End-to-end | critical user flows | few, stable |
+| Regression | every fixed bug | name the bug (`test_B004_empty_config`) |
 
-Boas práticas: um comportamento por teste · nomes que descrevem o comportamento (`returns_error_when_input_is_empty`) · padrão **Arrange–Act–Assert** · sem dependência de ordem/hora/rede · dados mínimos · mocks só nas fronteiras · casos-limite (vazio, nulo, máximo, negativo, unicode, concorrência).
+Best practices: one behavior per test · names that describe the behavior (`returns_error_when_input_is_empty`) · **Arrange–Act–Assert** pattern · no order/time/network dependence · minimal data · mocks only at the boundaries · edge cases (empty, null, maximum, negative, unicode, concurrency).
 
-## Quando não dá para automatizar (UI, jogos, hardware)
+## When it can't be automated (UI, games, hardware)
 
-- Escreve **passos manuais reprodutíveis** em `docs/TESTING.md` ou na tarefa: "1. abrir X · 2. clicar Y · 3. esperado: Z".
-- Extrai a lógica para funções puras testáveis e deixa a camada de UI **fina**.
-- Para UI web, considera testes de componentes/E2E; para jogos, testes da lógica/simulação sem render.
-- Se **não consegues** verificar (sem ambiente, sem ferramentas), diz-o **explicitamente** no resumo — "implementado, **não verificado**: motivo" — e abre tarefa em `TODO.md`.
+- Write **reproducible manual steps** in `docs/TESTING.md` or in the task: "1. open X · 2. click Y · 3. expected: Z".
+- Extract the logic into pure, testable functions and keep the UI layer **thin**.
+- For web UI, consider component/E2E tests; for games, logic/simulation tests without rendering.
+- If you **cannot** verify (no environment, no tools), say so **explicitly** in the summary — "implemented, **not verified**: reason" — and open a task in `TODO.md`.
 
-## Falhas
+## Failures
 
-- **Teste falha:** lê o erro inteiro; não "ajustes o teste para passar" a não ser que o teste esteja objetivamente errado (e justifica-o). Skill `debugging`.
-- **Teste flaky:** não o ignores nem repitas até passar — encontra a causa (tempo, ordem, estado partilhado, rede); regista em `docs/TESTING.md › Problemas conhecidos` e `BUGS.md`.
-- **Não consegues corrigir já:** nunca apagues/saltes testes para fazer o check passar sem registar em `BUGS.md` e no commit.
+- **Test fails:** read the whole error; don't "adjust the test to pass" unless the test is objectively wrong (and justify it). Skill `debugging`.
+- **Flaky test:** don't ignore it or rerun it until it passes — find the cause (time, order, shared state, network); record it in `docs/TESTING.md › Known issues` and `BUGS.md`.
+- **Can't fix it now:** never delete/skip tests to make the check pass without recording it in `BUGS.md` and in the commit.
 
-## Anti-padrões
+## Anti-patterns
 
-- Marcar `[x]` por ter escrito o código.
-- Testes que afirmam o que o código faz (espelho) em vez do que **deve** fazer.
-- Cobertura como objetivo em si (cobre comportamento, não linhas).
-- Verificação só "no caminho feliz".
-- Declarar sucesso com base num comando que não correu ou cujo output não leste.
+- Checking `[x]` because you wrote the code.
+- Tests that assert what the code does (a mirror) instead of what it **should** do.
+- Coverage as a goal in itself (cover behavior, not lines).
+- Verification only on the "happy path".
+- Declaring success based on a command that didn't run or whose output you didn't read.

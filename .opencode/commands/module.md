@@ -1,11 +1,11 @@
 ---
-description: Cria um módulo novo (estrutura, API pública, README, testes) e regista-o em docs/MODULES.md
+description: Create a new module (structure, public API, README, tests) and register it in docs/MODULES.md
 ---
-Usa as skills `reusable-modules`, `project-structure` e `code-documentation` para criar o módulo: $ARGUMENTS
+Use the skills `reusable-modules`, `project-structure` and `code-documentation` to create the module: $ARGUMENTS
 
-1. **Reutilizar primeiro:** `bash scripts/find-reuse.sh` com termos do módulo. Se já existir algo parecido, estende-o em vez de duplicar.
-2. **Sítio:** privado dentro de uma feature, ou `shared/<conceito>/` se for usado por 2+ módulos (segue `ARCHITECTURE.md` e `docs/CONVENTIONS.md`).
-3. **Estrutura:** ponto de entrada com a API pública mínima; ficheiros internos por responsabilidade; `README.md` (a partir de `docs/templates/MODULE_README.md`); testes sobre a API pública.
-4. **Qualidade:** funções puras com entradas/saídas explícitas, dependências injetadas, docstring em tudo o que exportas.
-5. **Registo:** linha em `docs/MODULES.md`; atualiza a tabela de módulos em `ARCHITECTURE.md`.
-6. `bash scripts/check.sh` verde → `bash scripts/commit.sh "feat(<modulo>): add <modulo> module"`.
+1. **Reuse first:** `bash scripts/find-reuse.sh` with the module's terms. If something similar already exists, extend it instead of duplicating it.
+2. **Location:** private within a feature, or `shared/<concept>/` if it's used by 2+ modules (follow `ARCHITECTURE.md` and `docs/CONVENTIONS.md`).
+3. **Structure:** entry point with the minimal public API; internal files by responsibility; `README.md` (from `docs/templates/MODULE_README.md`); tests for the public API.
+4. **Quality:** pure functions with explicit inputs/outputs, injected dependencies, docstrings in everything you export.
+5. **Register:** a line in `docs/MODULES.md`; update the module table in `ARCHITECTURE.md`.
+6. `bash scripts/check.sh` green → `bash scripts/commit.sh "feat(<module>): add <module> module"`.

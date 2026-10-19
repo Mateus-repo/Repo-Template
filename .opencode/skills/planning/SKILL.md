@@ -1,49 +1,49 @@
 ---
 name: planning
-description: Decompor objetivos, features ou milestones em tarefas pequenas, ordenadas e verificáveis, com critérios de aceitação, prioridade e tamanho. Usa SEMPRE que o utilizador pedir "planeia", "/plan", uma nova funcionalidade, um milestone, uma tarefa grande (L) ou vaga, quando a fila de TODO.md estiver vazia, ou antes de começar qualquer trabalho com mais de ~3 passos. Produz entradas prontas para TODO.md e, se necessário, propostas para ROADMAP.md.
+description: Break down goals, features or milestones into small, ordered, verifiable tasks, with acceptance criteria, priority and size. ALWAYS use when the user asks to "plan", "/plan", for a new feature, a milestone, a big (L) or vague task, when the TODO.md queue is empty, or before starting any work with more than ~3 steps. Produces entries ready for TODO.md and, if needed, proposals for ROADMAP.md.
 ---
 
 # Planning
 
-Um bom plano é uma lista de tarefas que um agente consegue **começar sem perguntas** e **provar que acabou**.
+A good plan is a task list an agent can **start without questions** and **prove it finished**.
 
-## Processo
+## Process
 
-1. **Objetivo** — 1 frase: que resultado observável existe no fim? Para quem?
-2. **Contexto** — lê `ROADMAP.md`, `ARCHITECTURE.md`, `DECISIONS.md`, código relevante. Não planeies no vácuo.
-3. **Âmbito** — o que **não** está incluído (vai para `IDEAS.md` se for tentador).
-4. **Fatiar verticalmente** — cada tarefa entrega valor ou progresso *verificável* de ponta a ponta (ex.: "criar e listar itens") em vez de camadas soltas ("fazer toda a BD"). Primeiro um **esqueleto andante** (a fatia mais fina que funciona), depois engrossar.
-4b. **Reutilização** — para cada tarefa que cria código: o que já existe e posso reutilizar (`docs/MODULES.md`, `scripts/find-reuse.sh`)? Em que módulo vive o código novo (skill `project-structure`)? Inclui na tarefa os docs/README/entrada em `MODULES.md`.
-5. **Riscos primeiro** — o que pode matar o plano (API desconhecida, performance, integração)? Faz um **spike** de ≤ 30 min cedo. Regista o resultado.
-6. **Ordenar** — dependências → risco → valor → esforço. Tarefas P0/P1 no topo.
-7. **Dimensionar** — S (< 30 min) · M (30–90 min) · L (> 90 min → **decompor mais**). Nada de L em `Agora`.
-8. **Critérios de aceitação** — verificáveis por comando ou passos manuais explícitos.
-9. **Escrever** em `TODO.md` e, se mudar a direção, propor em `ROADMAP.md`.
+1. **Goal** — 1 sentence: what observable result exists at the end? For whom?
+2. **Context** — read `ROADMAP.md`, `ARCHITECTURE.md`, `DECISIONS.md`, relevant code. Don't plan in a vacuum.
+3. **Scope** — what is **not** included (goes to `IDEAS.md` if it's tempting).
+4. **Slice vertically** — each task delivers value or *verifiable* progress end to end (e.g. "create and list items") instead of loose layers ("do the whole database"). First a **walking skeleton** (the thinnest slice that works), then thicken it.
+4b. **Reuse** — for each task that creates code: what already exists that I can reuse (`docs/MODULES.md`, `scripts/find-reuse.sh`)? Which module does the new code live in (skill `project-structure`)? Include the docs/README/`MODULES.md` entry in the task.
+5. **Risks first** — what could kill the plan (unknown API, performance, integration)? Do a **spike** of ≤ 30 min early. Record the result.
+6. **Order** — dependencies → risk → value → effort. P0/P1 tasks on top.
+7. **Size** — S (< 30 min) · M (30–90 min) · L (> 90 min → **break down further**). No L in `Now`.
+8. **Acceptance criteria** — verifiable by command or explicit manual steps.
+9. **Write** in `TODO.md` and, if it changes direction, propose in `ROADMAP.md`.
 
-## Formato de tarefa
+## Task format
 
 ```
-- [ ] T-021 [P1] [M] Guardar definições em ficheiro — aceitação: reiniciar a app mantém as definições; ficheiro inválido cai nos defaults com aviso; 3 testes novos  (ref: M1, D-004)
+- [ ] T-021 [P1] [M] Save settings to a file — acceptance: restarting the app keeps the settings; an invalid file falls back to the defaults with a warning; 3 new tests  (ref: M1, D-004)
 ```
 
-**Bons critérios:** "`scripts/check.sh` verde e o comando `x --help` lista a opção `--out`" · "com a lista vazia aparece o texto 'Sem itens'" · "300 ms ou menos para 10k linhas (benchmark em `tests/bench`)".
-**Maus critérios:** "funciona bem", "código limpo", "melhorar UX".
+**Good criteria:** "`scripts/check.sh` green and the command `x --help` lists the `--out` option" · "with an empty list the text 'No items' appears" · "300 ms or less for 10k lines (benchmark in `tests/bench`)".
+**Bad criteria:** "works well", "clean code", "improve UX".
 
-## Checklist de um bom plano
+## Checklist of a good plan
 
-- [ ] Cada tarefa é S ou M, com aceitação verificável.
-- [ ] Há uma fatia ponta-a-ponta cedo (esqueleto andante).
-- [ ] Riscos desconhecidos têm spike antes das tarefas que dependem deles.
-- [ ] Testes e docs fazem parte das tarefas (não são "depois").
-- [ ] Tarefas que criam código indicam o que reutilizam e onde o código novo vai viver.
-- [ ] Dependências entre tarefas estão explícitas (`depende de T-0xx`).
-- [ ] Nada fora do âmbito entrou; ideias foram para `IDEAS.md`.
-- [ ] Sabes qual é a primeira tarefa e podes começá-la agora.
+- [ ] Every task is S or M, with verifiable acceptance.
+- [ ] There's an end-to-end slice early (walking skeleton).
+- [ ] Unknown risks have a spike before the tasks that depend on them.
+- [ ] Tests and docs are part of the tasks (not "later").
+- [ ] Tasks that create code say what they reuse and where the new code will live.
+- [ ] Dependencies between tasks are explicit (`depends on T-0xx`).
+- [ ] Nothing out of scope got in; ideas went to `IDEAS.md`.
+- [ ] You know which the first task is and can start it now.
 
-## Planos para milestones
+## Plans for milestones
 
-Para cada milestone no `ROADMAP.md`: objetivo mensurável · critérios de conclusão (checkboxes) · riscos conhecidos · dependências. Detalha só o atual e o seguinte; os restantes ficam como objetivos de uma linha.
+For each milestone in `ROADMAP.md`: measurable goal · completion criteria (checkboxes) · known risks · dependencies. Detail only the current and the next one; the rest stay as one-line goals.
 
-## Replaneamento
+## Replanning
 
-Se a realidade divergiu (estimativa errada ×2, requisito mudou, descoberta nova): para, atualiza `TODO.md`, regista o porquê em `PROGRESS.md` (e `DECISIONS.md` se mudou a abordagem), e continua. Plano desatualizado é pior que nenhum plano.
+If reality diverged (estimate off by ×2, requirement changed, new discovery): stop, update `TODO.md`, record the why in `PROGRESS.md` (and `DECISIONS.md` if the approach changed), and continue. A stale plan is worse than no plan.

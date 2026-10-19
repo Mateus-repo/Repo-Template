@@ -1,60 +1,60 @@
 ---
 name: session-handoff
-description: Rituais de início e fim de sessão para não perder contexto — arranque (ler PROGRESS, QUESTIONS, TODO, ROADMAP), checkpoints, pausas e handoff final (atualizar docs, verificar, commitar, resumir). Usa SEMPRE no início de qualquer sessão de trabalho, depois de o contexto ser comprimido, quando o utilizador pedir /start, /handoff ou /status, quando o orçamento de tempo estiver a acabar, ou quando fores parar por qualquer motivo.
+description: Session start and end rituals to avoid losing context — startup (read PROGRESS, QUESTIONS, TODO, ROADMAP), checkpoints, pauses, and the final handoff (update docs, verify, commit, summarize). ALWAYS use at the start of any work session, after the context has been compressed, when the user asks for /start, /handoff, or /status, when the time budget is running out, or when you're about to stop for any reason.
 ---
 
 # Session handoff
 
-A sessão seguinte (tu, depois de uma compressão de contexto, ou outro agente) só sabe o que está **escrito nos ficheiros**.
+The next session (you after a context compression, or another agent) only knows what is **written in the files**.
 
-## Arranque (≈ 2 min)
+## Startup (≈ 2 min)
 
-1. `bash scripts/session-start.sh` — data, branch, git, últimos commits, estado, relógio.
-2. `PROGRESS.md` → *Estado atual* e última entrada do diário.
-3. `QUESTIONS.md` → **há respostas novas?** (campo `Resposta:` preenchido). Aplica-as, move para *Respondidas*, desbloqueia tarefas.
-4. `TODO.md` → *Agora* e *Bloqueadas*; `ROADMAP.md` → milestone atual; `BUGS.md` → P0/P1 abertos.
-5. `DECISIONS.md` por alto; `ARCHITECTURE.md` se for mexer em estrutura.
-6. Se `git status` mostra alterações não commitadas que não são tuas desta sessão (ex.: checkpoint WIP): percebe o que são antes de continuar.
-7. Corre `bash scripts/check.sh` para saber o estado **real** (não confies em "estava verde").
-8. Define a meta da sessão (1–3 linhas) no `PROGRESS.md` e **começa**.
+1. `bash scripts/session-start.sh` — date, branch, git, recent commits, state, clock.
+2. `PROGRESS.md` → *Current state* and the latest journal entry.
+3. `QUESTIONS.md` → **any new answers?** (`Answer:` field filled in). Apply them, move to *Answered*, unblock tasks.
+4. `TODO.md` → *Now* and *Blocked*; `ROADMAP.md` → current milestone; `BUGS.md` → open P0/P1.
+5. Skim `DECISIONS.md`; `ARCHITECTURE.md` if you'll touch structure.
+6. If `git status` shows uncommitted changes that aren't yours from this session (e.g. a WIP checkpoint): understand what they are before continuing.
+7. Run `bash scripts/check.sh` to learn the **real** state (don't trust "it was green").
+8. Set the session goal (1–3 lines) in `PROGRESS.md` and **get started**.
 
-## Durante: checkpoints (a cada ~25 min ou ao fim de cada tarefa)
+## During: checkpoints (every ~25 min or at the end of each task)
 
-- `TODO.md` e `PROGRESS.md › Estado atual` atualizados (o que estou a fazer, o que falta, saúde do build).
+- `TODO.md` and `PROGRESS.md › Current state` updated (what I'm doing, what's left, build health).
 - Commit (`auto-commit`).
-- `bash scripts/clock.sh` — quanto tempo resta?
+- `bash scripts/clock.sh` — how much time is left?
 
-## Pausa/interrupção inesperada
+## Pause/unexpected interruption
 
-Se vais parar sem fim planeado (erro, limite, bloqueio): faz **commit do que está estável**, escreve em `PROGRESS.md › Estado atual` exatamente **onde ficaste e qual é o próximo passo concreto** (comando a correr, ficheiro a editar). Se o repo ficou a meio de algo, diz qual ficheiro/branch.
+If you're stopping without a planned end (error, limit, blocker): **commit what's stable**, and write in `PROGRESS.md › Current state` exactly **where you left off and what the next concrete step is** (command to run, file to edit). If the repo is mid-something, say which file/branch.
 
-## Fim de sessão / handoff (≈ 5 min)
+## End of session / handoff (≈ 5 min)
 
-1. Termina com segurança o que está a meio — ou isola (branch/stash/commit WIP) e documenta.
-2. `bash scripts/check.sh`. Se falha e não corriges: `BUGS.md` + diz no resumo.
-3. Atualiza: `TODO.md` · `PROGRESS.md` (*Estado atual* + entrada nova no diário) · `DECISIONS.md` · `BUGS.md` · `CHANGELOG.md` · `ROADMAP.md` (estados dos milestones) · `IDEAS.md`.
-4. Triagem rápida de `QUESTIONS.md`: perguntas ainda precisas? agrupadas? com recomendação por defeito?
-5. Commit final (`bash scripts/commit.sh "docs: handoff <data>" ...` ou commits lógicos).
-6. Se estiver o autopilot ativo: `bash scripts/autopilot.sh stop "<motivo>"`.
-7. Resumo ao utilizador (≤ 10 linhas).
+1. Safely finish what's half-done — or isolate it (branch/stash/WIP commit) and document it.
+2. `bash scripts/check.sh`. If it fails and you can't fix it: `BUGS.md` + say so in the summary.
+3. Update: `TODO.md` · `PROGRESS.md` (*Current state* + new journal entry) · `DECISIONS.md` · `BUGS.md` · `CHANGELOG.md` · `ROADMAP.md` (milestone states) · `IDEAS.md`.
+4. Quick triage of `QUESTIONS.md`: questions still needed? grouped? with a default recommendation?
+5. Final commit (`bash scripts/commit.sh "docs: handoff <date>" ...` or logical commits).
+6. If autopilot is running: `bash scripts/autopilot.sh stop "<reason>"`.
+7. Summary to the user (≤ 10 lines).
 
-### Entrada do diário (modelo)
+### Journal entry (template)
 
 ```
-### AAAA-MM-DD HH:MM — título curto  (duração: Xh Ym)
-- Meta: …  → Resultado: cumprida / parcial (porquê)
-- Feito: T-0xx, T-0yy
-- Decisões: D-0xx (resumo)
-- Descobertas/problemas: …
-- Estado ao sair: build ✅/❌ · testes ✅/❌ (n) · branch · hash
-- Próximo passo concreto: …
+### YYYY-MM-DD HH:MM — short title  (duration: Xh Ym)
+- Goal: …  → Outcome: achieved / partial (why)
+- Done: T-0xx, T-0yy
+- Decisions: D-0xx (summary)
+- Findings/problems: …
+- State on exit: build ✅/❌ · tests ✅/❌ (n) · branch · hash
+- Next concrete step: …
 ```
 
-### Resumo final ao utilizador
+### Final summary to the user
 
-1. **Feito** (IDs + 1 linha cada)  2. **Decidi eu** (D-NNN, para validares)  3. **Preciso de ti** (Q-NNN, com a minha recomendação)  4. **Estado** (build/testes/branch)  5. **Próximo passo**.
-Se algo **não funcionou**, diz-o sem rodeios com o diagnóstico (erro, comando, o que já excluíste).
+1. **Done** (IDs + 1 line each)  2. **I decided** (D-NNN, for you to validate)  3. **I need you** (Q-NNN, with my recommendation)  4. **State** (build/tests/branch)  5. **Next step**.
+If something **didn't work**, say so plainly with the diagnosis (error, command, what you've already ruled out).
 
-## Recuperar depois de compressão de contexto
+## Recovering after context compression
 
-Não confies no resumo — repete o **Arranque**. O estado verdadeiro é: ficheiros `.md` + `git log` + `git status` + `scripts/check.sh`.
+Don't trust the summary — repeat **Startup**. The true state is: `.md` files + `git log` + `git status` + `scripts/check.sh`.

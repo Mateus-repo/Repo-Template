@@ -1,8 +1,8 @@
 ---
-description: Configura o projeto (1ª vez) — deteta a stack e preenche docs, comandos e roadmap inicial
+description: Set up the project (first run) — detects the stack and fills in docs, commands and the initial roadmap
 ---
-Usa a skill `project-bootstrap` e executa-a até ao fim, sem me pedir confirmações.
+Use the skill `project-bootstrap` and run it through to the end, without asking me for confirmations.
 
-Contexto extra do utilizador (pode estar vazio): $ARGUMENTS
+Extra context from the user (may be empty): $ARGUMENTS
 
-No fim, mostra um resumo curto: stack detetada, comandos preenchidos, milestones propostos e o que deixaste em `QUESTIONS.md`.
+At the end, show a short summary: detected stack, filled-in commands, proposed milestones, and what you left in `QUESTIONS.md`.

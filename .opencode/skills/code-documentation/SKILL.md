@@ -1,102 +1,102 @@
 ---
 name: code-documentation
-description: Documentar o código e o projeto em camadas — docstrings em tudo o que é público, README em cada módulo, catálogo docs/MODULES.md, comentários só para o porquê, exemplos de uso — e manter a documentação sempre sincronizada com o código. Usa SEMPRE ao criar ou alterar funções, classes, componentes ou módulos exportados, ao criar uma pasta de módulo, antes de dar uma tarefa como feita, quando o utilizador pedir para documentar, comentar ou explicar o código, e ao rever documentação desatualizada.
+description: Document code and the project in layers — docstrings on everything public, a README in each module, a docs/MODULES.md catalog, comments only for the why, usage examples — and keep documentation always in sync with the code. ALWAYS use when creating or changing functions, classes, components or exported modules, when creating a module folder, before calling a task done, when the user asks you to document, comment on or explain the code, and when reviewing outdated documentation.
 ---
 
 # Code documentation
 
-Documentar **tudo o que outra parte do programa (ou outra pessoa) vai usar**. Código sem contrato escrito não é reutilizável: obriga a ler a implementação.
+Document **everything another part of the program (or another person) will use**. Code without a written contract isn't reusable: it forces readers into the implementation.
 
-## As 4 camadas
+## The 4 layers
 
-| Camada | Onde | Conteúdo | Obrigatório para |
+| Layer | Where | Content | Required for |
 |--------|------|----------|------------------|
-| 1. Projeto | `README.md`, `ARCHITECTURE.md` | O que é, como correr, como está organizado | Sempre |
-| 2. Módulo | `<modulo>/README.md` (modelo: `docs/templates/MODULE_README.md`) | Propósito, o que **não** faz, API pública, exemplo, dependências, notas | Todo o módulo/pasta com ≥ 3 ficheiros de código |
-| 3. Símbolo | Docstring/comentário de documentação ao lado da função/classe/tipo | Contrato completo (abaixo) | Tudo o que é **exportado/público** |
-| 4. Linha | Comentário no código | O **porquê** não óbvio (decisão, workaround, armadilha) | Só quando necessário |
+| 1. Project | `README.md`, `ARCHITECTURE.md` | What it is, how to run it, how it's organized | Always |
+| 2. Module | `<module>/README.md` (template: `docs/templates/MODULE_README.md`) | Purpose, what it **doesn't** do, public API, example, dependencies, notes | Every module/folder with ≥ 3 code files |
+| 3. Symbol | Docstring/documentation comment next to the function/class/type | Full contract (below) | Everything **exported/public** |
+| 4. Line | Comment in the code | The non-obvious **why** (decision, workaround, pitfall) | Only when needed |
 
-Mais o **catálogo** `docs/MODULES.md`: uma linha por função/módulo reutilizável (skill `reusable-modules`).
+Plus the **catalog** `docs/MODULES.md`: one line per reusable function/module (skill `reusable-modules`).
 
-## Contrato de uma função pública
+## Contract of a public function
 
-Escreve, por esta ordem (omite o que não se aplica):
+Write, in this order (omit what doesn't apply):
 
-1. **Uma frase** no imperativo/presente: o que faz (não como).
-2. **Parâmetros:** nome, tipo, significado, restrições (ex.: `> 0`, não vazio), valores por defeito.
-3. **Retorno:** tipo e significado, incluindo casos especiais (vazio, `null`, não encontrado).
-4. **Erros:** que falhas pode haver e como são sinalizadas (exceção/`Result`/código).
-5. **Efeitos secundários:** I/O, estado mutado, rede, tempo, aleatoriedade. Se for **pura**, di-lo.
-6. **Exemplo mínimo** executável (o melhor teste da API; idealmente doctest/exemplo testado).
-7. Complexidade ou limites **só** se relevantes (ex.: O(n²), thread-safety).
+1. **One sentence** in the imperative/present: what it does (not how).
+2. **Parameters:** name, type, meaning, constraints (e.g. `> 0`, non-empty), default values.
+3. **Returns:** type and meaning, including special cases (empty, `null`, not found).
+4. **Errors:** which failures can occur and how they are signaled (exception/`Result`/code).
+5. **Side effects:** I/O, mutated state, network, time, randomness. If it's **pure**, say so.
+6. **Minimal runnable example** (the best test of the API; ideally a doctest/tested example).
+7. Complexity or limits **only** if relevant (e.g. O(n²), thread-safety).
 
-### Formato por linguagem (usa o idiomático da stack)
+### Format per language (use the idiomatic one for the stack)
 
 ```ts
 /**
- * Divide `items` em blocos de tamanho `size`.
- * Pura. Não altera o array original.
+ * Splits `items` into blocks of size `size`.
+ * Pure. Does not modify the original array.
  *
- * @param items Lista a dividir.
- * @param size  Tamanho de cada bloco (inteiro > 0).
- * @returns Lista de blocos; o último pode ser menor. Lista vazia → `[]`.
- * @throws {RangeError} se `size` não for inteiro positivo.
+ * @param items List to split.
+ * @param size  Size of each block (integer > 0).
+ * @returns List of blocks; the last one may be smaller. Empty list → `[]`.
+ * @throws {RangeError} if `size` is not a positive integer.
  * @example chunk([1,2,3,4,5], 2) // [[1,2],[3,4],[5]]
  */
 ```
 
 ```python
 def chunk(items: list[T], size: int) -> list[list[T]]:
-    """Divide `items` em blocos de tamanho `size`. Pura.
+    """Splits `items` into blocks of size `size`. Pure.
 
     Args:
-        items: Lista a dividir.
-        size: Tamanho de cada bloco (int > 0).
+        items: List to split.
+        size: Size of each block (int > 0).
     Returns:
-        Lista de blocos; o último pode ser menor. Vazia -> [].
+        List of blocks; the last one may be smaller. Empty -> [].
     Raises:
-        ValueError: se `size` não for inteiro positivo.
+        ValueError: if `size` is not a positive integer.
     Example:
         >>> chunk([1, 2, 3, 4, 5], 2)
         [[1, 2], [3, 4], [5]]
     """
 ```
 
-Rust: `///` com secções `# Errors`, `# Panics`, `# Examples` (doctests). Go: comentário a começar pelo nome (`// Chunk divide…`). C#: `/// <summary>`, `<param>`, `<returns>`, `<exception>`. GDScript: `##` acima da função.
+Rust: `///` with sections `# Errors`, `# Panics`, `# Examples` (doctests). Go: comment starting with the name (`// Chunk splits…`). C#: `/// <summary>`, `<param>`, `<returns>`, `<exception>`. GDScript: `##` above the function.
 
-## README de módulo
+## Module README
 
-Copia `docs/templates/MODULE_README.md` e preenche: propósito (1 frase) · o que **não** faz · API pública (tabela) · exemplo de uso · dependências permitidas · decisões/limitações · como testar. Máx. ~1 ecrã. Cria-o **quando crias o módulo**, não depois.
+Copy `docs/templates/MODULE_README.md` and fill in: purpose (1 sentence) · what it **doesn't** do · public API (table) · usage example · allowed dependencies · decisions/limitations · how to test. Max ~1 screen. Create it **when you create the module**, not afterwards.
 
-## Comentários dentro do código
+## Comments in the code
 
-- Explica o **porquê**, nunca repetes o **o quê**. Comentário que descreve código confuso → reescreve o código.
-- Marca workarounds com contexto: `// Workaround: API X devolve 200 com corpo vazio (ver B-004)`.
-- `TODO` no código só com referência a uma tarefa: `// TODO(T-031): …`.
-- Nada de código comentado: o git guarda o histórico.
+- Explain the **why**, never repeat the **what**. Comment describing confusing code → rewrite the code.
+- Mark workarounds with context: `// Workaround: API X returns 200 with empty body (see B-004)`.
+- `TODO` in code only with a reference to a task: `// TODO(T-031): …`.
+- No commented-out code: git keeps the history.
 
-## Manter sincronizado (parte da Definition of Done)
+## Keep in sync (part of the Definition of Done)
 
-No **mesmo commit** que altera comportamento ou API pública:
-- [ ] Docstring atualizada (assinatura, erros, exemplo ainda corre).
-- [ ] README do módulo reflete a API.
-- [ ] `docs/MODULES.md` com a entrada nova/alterada/removida.
-- [ ] `CHANGELOG.md` se a mudança é visível para quem usa.
-- [ ] `ARCHITECTURE.md` se a estrutura ou as dependências mudaram.
+In the **same commit** that changes behavior or the public API:
+- [ ] Docstring updated (signature, errors, example still runs).
+- [ ] Module README reflects the API.
+- [ ] `docs/MODULES.md` with the new/changed/removed entry.
+- [ ] `CHANGELOG.md` if the change is visible to users.
+- [ ] `ARCHITECTURE.md` if the structure or the dependencies changed.
 
-Docs e código discordam → **o código manda**; corrige a doc. Nunca deixes doc que mente.
+Docs and code disagree → **the code wins**; fix the doc. Never leave docs that lie.
 
-## Língua
+## Language
 
-Segue a língua já usada no código. Se o projeto é novo: identificadores em inglês; docstrings e README na língua definida em `docs/CONVENTIONS.md` (por defeito PT-PT). Sê consistente.
+Follow the language already used in the code. For a new project: identifiers in English; docstrings and README in the language set in `docs/CONVENTIONS.md` (default PT-PT). Be consistent.
 
-## Revisão rápida (auto-verificação)
+## Quick review (self-verification)
 
-1. Alguém que nunca viu o módulo consegue usá-lo só com o README + docstrings?
-2. Os exemplos correm de facto? (testa-os)
-3. Há símbolos exportados sem docstring? (`grep` pelos exports e confirma)
-4. Os nomes dizem o que fazem sem precisar do comentário?
+1. Someone who has never seen the module can use it with just the README + docstrings?
+2. Do the examples actually run? (test them)
+3. Any exported symbols without a docstring? (`grep` the exports and confirm)
+4. Do the names say what they do without needing the comment?
 
-## Anti-padrões
+## Anti-patterns
 
-Docstring que só repete o nome (`/** Gets the user. */`) · documentação gerada em massa sem conteúdo real · README com funcionalidades que não existem · comentários a pedir desculpa · exemplos que já não compilam · doc só em chat e não no repo.
+Docstring that only repeats the name (`/** Gets the user. */`) · bulk-generated documentation with no real content · README listing features that don't exist · apologetic comments · examples that no longer compile · docs only in chat and not in the repo.

@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-# Verificação completa: deteta a stack e corre lint + testes (+ build quando existir).
-# Para personalizar: cria scripts/check.local.sh (tem prioridade total).
-# Sai com código != 0 se algo falhar.
+# Full verification: detects the stack and runs lint + tests (+ build when it exists).
+# To customise: create scripts/check.local.sh (it takes full priority).
+# Exits with a non-zero code if something fails.
 cd "$(dirname "${BASH_SOURCE[0]}")/.." || exit 1
 
 if [[ -f scripts/check.local.sh ]]; then exec bash scripts/check.local.sh; fi
 
 fail=0
 ran=0
-step() { # step "nome" comando...
+step() { # step "name" command...
   local name="$1"; shift
   ran=$((ran+1))
   echo "▶ $name"
@@ -16,9 +16,9 @@ step() { # step "nome" comando...
 }
 has() { command -v "$1" >/dev/null 2>&1; }
 npm_script() { [[ -f package.json ]] && grep -q "\"$1\"[[:space:]]*:" package.json; }
-# o 'npm init' cria um script de teste que falha de propósito: não conta
+# 'npm init' creates a test script that fails on purpose: do not count it
 npm_test_stub() { grep -Eq '"test"[[:space:]]*:[[:space:]]*"[^"]*no test specified' package.json; }
-# pytest sai com 5 quando não há testes: não é falha
+# pytest exits with 5 when there are no tests: not a failure
 pytest_ok() { pytest -q; local c=$?; [[ $c -eq 0 || $c -eq 5 ]]; }
 
 # Node / TypeScript
@@ -55,19 +55,19 @@ if compgen -G "*.sln" >/dev/null || compgen -G "*.csproj" >/dev/null || compgen 
   step "dotnet test"  dotnet test --nologo -v q --no-build
 fi
 
-# Godot (sem testes por defeito: apenas verificação de scripts, se o binário existir)
+# Godot (no tests by default: only a script check, if the binary exists)
 if [[ -f project.godot ]]; then
-  if has godot; then step "godot (carregar projeto)" godot --headless --quit --path .; else echo "ℹ Godot: binário 'godot' não encontrado no PATH — verificação manual necessária."; fi
+  if has godot; then step "godot (load project)" godot --headless --quit --path .; else echo "ℹ Godot: 'godot' binary not found on PATH — manual verification needed."; fi
 fi
 
-# Estrutura, documentação e modularidade (só avisos; ver scripts/structure-check.sh)
+# Structure, documentation and modularity (warnings only; see scripts/structure-check.sh)
 [[ -x scripts/structure-check.sh || -f scripts/structure-check.sh ]] && bash scripts/structure-check.sh || true
 echo
 
-# Shell scripts do próprio repo
+# The repo's own shell scripts
 for f in scripts/*.sh; do step "bash -n $f" bash -n "$f"; done
 
 echo
-if (( ran == 0 )); then echo "Nenhuma verificação detetada."; exit 0; fi
-if (( fail > 0 )); then echo "FALHOU: $fail de $ran verificações."; exit 1; fi
-echo "OK: $ran verificações passaram."
+if (( ran == 0 )); then echo "No verification detected."; exit 0; fi
+if (( fail > 0 )); then echo "FAILED: $fail of $ran checks."; exit 1; fi
+echo "OK: $ran checks passed."

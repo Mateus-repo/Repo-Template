@@ -1,36 +1,36 @@
-# Testes — {{PROJECT_NAME}}
+# Tests — {{PROJECT_NAME}}
 
-> Estratégia de verificação. Skill: `testing-verification`.
+> Verification strategy. Skill: `testing-verification`.
 
-## Filosofia
+## Philosophy
 
-- Testa **comportamento**, não implementação. Testes rápidos, determinísticos, independentes.
-- Cada bug corrigido ganha um teste de regressão.
-- Pirâmide: muitos unitários · alguns de integração · poucos ponta-a-ponta.
-- Sem testes automáticos possíveis (ex.: UI, jogo)? Define **verificação manual reprodutível** (passos escritos) e regista-a na tarefa.
+- Test **behavior**, not implementation. Fast, deterministic, independent tests.
+- Every fixed bug gets a regression test.
+- Pyramid: many unit · some integration · few end-to-end.
+- No automated tests possible (e.g. UI, game)? Define **reproducible manual verification** (written steps) and record it in the task.
 
-## Comandos
+## Commands
 
-| O quê | Comando |
+| What | Command |
 |-------|---------|
-| Tudo | `bash scripts/check.sh` |
-| Unitários | `TODO` |
-| Integração | `TODO` |
-| Um teste | `TODO` |
-| Cobertura | `TODO` |
+| All | `bash scripts/check.sh` |
+| Unit | `TODO` |
+| Integration | `TODO` |
+| One test | `TODO` |
+| Coverage | `TODO` |
 
-## O que tem de ter testes
+## What must have tests
 
-- Lógica de domínio e regras de negócio · parsing/validação · cálculos · casos-limite e erros.
+- Domain logic and business rules · parsing/validation · calculations · edge cases and errors.
 
-## O que se verifica manualmente
+## What is verified manually
 
-_Lista de fluxos de UI/fluxos visuais + passos._
+_List of UI flows/visual flows + steps._
 
-## Dados de teste
+## Test data
 
-_Onde estão, como se geram; nada de dados reais/pessoais._
+_Where they are, how they're generated; no real/personal data._
 
-## Problemas conhecidos (flaky, lentos)
+## Known issues (flaky, slow)
 
-_Nenhum._
+_None._

@@ -1,14 +1,14 @@
 ---
-description: Audita organização de pastas, documentação e reutilização de código, e corrige
+description: Audit folder organization, documentation and code reuse, then fix
 ---
-Usa as skills `project-structure`, `code-documentation` e `reusable-modules` para auditar: $ARGUMENTS (se vazio: todo o código do projeto).
+Use the skills `project-structure`, `code-documentation` and `reusable-modules` to audit: $ARGUMENTS (if empty: all of the project's code).
 
-Avisos automáticos:
+Automatic warnings:
 !`bash scripts/structure-check.sh`
 
-Faz, por esta ordem, com commits pequenos e separados (nunca misturar com mudanças de comportamento):
+Do, in this order, with small separate commits (never mix them with behavior changes):
 
-1. **Estrutura** — corrige os avisos (ficheiros grandes, pastas-gaveta, nomes vagos) com `git mv`/divisão; `bash scripts/check.sh` verde a cada passo.
-2. **Reutilização** — procura duplicação (`bash scripts/find-reuse.sh` com termos das funções suspeitas); unifica em `shared/<conceito>/` ou abre `T-NNN` se for grande.
-3. **Documentação** — README em cada módulo sem ele, docstrings nas funções exportadas sem contrato, `docs/MODULES.md` e `ARCHITECTURE.md` sincronizados com o código.
-4. Regista o que fizeste em `PROGRESS.md`; o que não coube vai para `TODO.md`; ideias para `IDEAS.md`.
+1. **Structure** — fix the warnings (large files, catch-all folders, vague names) with `git mv`/splitting; `bash scripts/check.sh` green at every step.
+2. **Reuse** — look for duplication (`bash scripts/find-reuse.sh` with terms from the suspicious functions); unify into `shared/<concept>/` or open `T-NNN` if it's large.
+3. **Documentation** — a README in every module that lacks one, docstrings in exported functions with no contract, `docs/MODULES.md` and `ARCHITECTURE.md` in sync with the code.
+4. Register what you did in `PROGRESS.md`; what didn't fit goes to `TODO.md`; ideas to `IDEAS.md`.

@@ -1,29 +1,29 @@
 # BUGS — {{PROJECT_NAME}}
 
-> Bugs conhecidos. Cada bug corrigido deve ter um teste de regressão (ou nota a explicar porque não).
-> Severidade: **P0** crítico (perda de dados/crash/segurança) · **P1** funcionalidade principal quebrada · **P2** incómodo com alternativa · **P3** cosmético.
+> Known bugs. Each fixed bug must have a regression test (or a note explaining why not).
+> Severity: **P0** critical (data loss/crash/security) · **P1** core functionality broken · **P2** inconvenience with a workaround · **P3** cosmetic.
 > Skill: `debugging`.
 
-## Abertos
+## Open
 
-_Nenhum._
+_None._
 
-## Em investigação
+## Under investigation
 
-_Nenhum._
+_None._
 
-## Corrigidos
+## Fixed
 
-_Nenhum._
+_None._
 
-<!-- Modelo:
+<!-- Template:
 
-### B-NNN [P?] — Título  (AAAA-MM-DD)
-- **Sintoma:** o que se vê.
-- **Reprodução:** passos mínimos / comando.
-- **Esperado vs. obtido:** …
-- **Hipóteses:** H1 … (✗ excluída: …) · H2 … (✓ confirmada)
-- **Causa raiz:** …
-- **Correção:** commit / ficheiro.
-- **Teste de regressão:** caminho.
+### B-NNN [P?] — Title  (YYYY-MM-DD)
+- **Symptom:** what you see.
+- **Reproduction:** minimal steps / command.
+- **Expected vs. actual:** …
+- **Hypotheses:** H1 … (✗ ruled out: …) · H2 … (✓ confirmed)
+- **Root cause:** …
+- **Fix:** commit / file.
+- **Regression test:** path.
 -->

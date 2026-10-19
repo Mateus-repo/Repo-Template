@@ -1,54 +1,54 @@
 # ROADMAP — {{PROJECT_NAME}}
 
-> A direção do projeto: **porquê** e **quando**. O utilizador decide; o agente propõe e mantém atualizado o estado.
-> Tarefas concretas vivem em `TODO.md`. Ideias soltas em `IDEAS.md`.
+> The project's direction: **why** and **when**. The user decides; the agent proposes and keeps the state up to date.
+> Concrete tasks live in `TODO.md`. Loose ideas in `IDEAS.md`.
 
-## Visão
+## Vision
 
-<!-- 1–3 frases: o que este projeto é quando estiver "bem feito". -->
-_A preencher._
+<!-- 1–3 sentences: what this project is when it is "done well". -->
+_To be filled in._
 
-## Princípios (o que NÃO sacrificamos)
+## Principles (what we do NOT sacrifice)
 
-- _ex.: simplicidade antes de funcionalidades_
-- _ex.: tudo testável e documentado_
+- _e.g.: simplicity before features_
+- _e.g.: everything testable and documented_
 
-## Fora de escopo (por agora)
+## Out of scope (for now)
 
-- _a preencher — evita crescimento de âmbito_
+- _to be filled in — prevents scope creep_
 
-## Estado dos milestones
+## Milestone status
 
-Legenda: `⬜ por começar` · `🟦 em curso` · `✅ feito` · `⏸ em pausa` · `❌ cancelado`
+Legend: `⬜ not started` · `🟦 in progress` · `✅ done` · `⏸ paused` · `❌ cancelled`
 
-| # | Milestone | Estado | Objetivo mensurável |
+| # | Milestone | Status | Measurable goal |
 |---|-----------|--------|---------------------|
-| M0 | Fundações | ⬜ | Repo, CI/check, estrutura base, `scripts/check.sh` verde |
-| M1 | MVP | ⬜ | _o mínimo utilizável de ponta a ponta_ |
-| M2 | Qualidade | ⬜ | Testes, tratamento de erros, documentação |
-| M3 | Polimento | ⬜ | UX/UI, performance, empacotamento |
+| M0 | Foundations | ⬜ | Repo, CI/check, base structure, `scripts/check.sh` green |
+| M1 | MVP | ⬜ | _the minimum usable end to end_ |
+| M2 | Quality | ⬜ | Tests, error handling, documentation |
+| M3 | Polish | ⬜ | UX/UI, performance, packaging |
 
-## M0 — Fundações
+## M0 — Foundations
 
-**Objetivo:** ambiente de desenvolvimento fiável.
-**Critérios de conclusão:**
-- [ ] Projeto compila/corre num comando
-- [ ] `bash scripts/check.sh` corre lint + testes
-- [ ] `AGENTS.md` com comandos reais preenchidos
-- [ ] `ARCHITECTURE.md` descreve a estrutura inicial
+**Goal:** a reliable development environment.
+**Completion criteria:**
+- [ ] Project builds/runs with one command
+- [ ] `bash scripts/check.sh` runs lint + tests
+- [ ] `AGENTS.md` with real commands filled in
+- [ ] `ARCHITECTURE.md` describes the initial structure
 
 ## M1 — MVP
 
-**Objetivo:** _a preencher_
-**Critérios de conclusão:**
-- [ ] _a preencher_
+**Goal:** _to be filled in_
+**Completion criteria:**
+- [ ] _to be filled in_
 
-**Riscos conhecidos:** _a preencher_
+**Known risks:** _to be filled in_
 
-<!-- Copiar o bloco acima para M2, M3… à medida que forem detalhados. Detalha só o milestone atual + o seguinte. -->
+<!-- Copy the block above to M2, M3… as they get detailed. Detail only the current milestone + the next one. -->
 
-## Histórico de alterações ao roadmap
+## Roadmap change history
 
-| Data | Alteração | Motivo |
+| Date | Change | Reason |
 |------|-----------|--------|
-| {{DATE}} | Criação do roadmap | Projeto iniciado |
+| {{DATE}} | Roadmap created | Project started |

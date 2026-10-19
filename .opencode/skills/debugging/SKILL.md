@@ -1,65 +1,65 @@
 ---
 name: debugging
-description: Método sistemático para diagnosticar e corrigir bugs, falhas de testes, erros de build, crashes e comportamento inesperado. Usa SEMPRE que algo falhar, um teste partir, houver uma mensagem de erro, o resultado não for o esperado, uma correção não funcionar, ou o utilizador reportar um problema. Reproduzir, gerar hipóteses alternativas, isolar, corrigir a causa raiz e deixar teste de regressão.
+description: Systematic method to diagnose and fix bugs, test failures, build errors, crashes and unexpected behavior. ALWAYS use when something fails, a test breaks, there is an error message, the result isn't the expected one, a fix doesn't work, or the user reports a problem. Reproduce, generate alternative hypotheses, isolate, fix the root cause and leave a regression test.
 ---
 
 # Debugging
 
-Não adivinhes. **Reproduz → observa → hipotetiza → testa → corrige a causa → prova.**
+Don't guess. **Reproduce → observe → hypothesize → test → fix the cause → prove it.**
 
-## 1. Reproduzir
+## 1. Reproduce
 
-- Comando/passos **mínimos** que falham, de forma determinística. Sem reprodução, não há correção — só esperança.
-- Regista o comando exato e o output **completo** (não parafraseies a mensagem de erro).
-- Intermitente? Procura o que varia: dados, tempo, ordem, concorrência, ambiente, cache.
+- **Minimal** command/steps that fail, deterministically. Without reproduction there's no fix — only hope.
+- Record the exact command and the **full** output (don't paraphrase the error message).
+- Intermittent? Look for what varies: data, timing, order, concurrency, environment, cache.
 
-## 2. Ler o que o sistema te diz
+## 2. Read what the system tells you
 
-- Stack trace de **baixo para cima** até ao teu código; mensagem de erro completa; logs à volta do momento.
-- O que mudou? `git log -p`, `git diff`, `git stash` para comparar. **Bisect** quando "funcionava ontem": `git bisect start; git bisect bad; git bisect good <hash>` + comando de teste.
+- Stack trace from **bottom up** to your code; the full error message; logs around the moment.
+- What changed? `git log -p`, `git diff`, `git stash` to compare. **Bisect** when "it worked yesterday": `git bisect start; git bisect bad; git bisect good <hash>` + test command.
 
-## 3. Hipóteses — sempre mais do que uma
+## 3. Hypotheses — always more than one
 
-Escreve **3–5 hipóteses** diferentes antes de mexer (usa o espírito dos 5 ângulos):
+Write **3–5 different** hypotheses before touching anything (use the spirit of the 5 angles):
 
-1. Dados/input inesperado · 2. Estado/ordem de execução · 3. Ambiente/configuração/versão · 4. Lógica do meu código · 5. Dependência/biblioteca/plataforma.
+1. Unexpected data/input · 2. State/execution order · 3. Environment/configuration/version · 4. Logic in my code · 5. Dependency/library/platform.
 
-Para cada uma: **que observação a confirmaria ou excluiria?** Ordena por (probabilidade × baixo custo de testar). Testa uma de cada vez e **regista** em `BUGS.md` (`H1 ✗ excluída: …`).
+For each one: **what observation would confirm or rule it out?** Rank by (probability × low cost of testing). Test one at a time and **record** it in `BUGS.md` (`H1 ✗ ruled out: …`).
 
-## 4. Isolar
+## 4. Isolate
 
-- Reduz: remove código/dados até ao mínimo que ainda falha.
-- Instrumenta: logs/asserts/prints temporários nos pontos de decisão (e **remove-os** depois).
-- Divide-e-conquista: o problema está antes ou depois deste ponto?
-- Compara um caso que funciona com um que falha — a diferença é a pista.
+- Reduce: strip code/data down to the minimum that still fails.
+- Instrument: temporary logs/asserts/prints at the decision points (and **remove them** afterwards).
+- Divide and conquer: is the problem before or after this point?
+- Compare a working case with a failing one — the difference is the clue.
 
-## 5. Corrigir a causa, não o sintoma
+## 5. Fix the cause, not the symptom
 
-- Pergunta "porquê?" até chegares a algo que, se mudado, torna o bug impossível ("5 porquês").
-- Evita *patches* que escondem (try/catch vazio, `if` para o caso específico, sleep, retry cego).
-- Procura o **mesmo padrão noutros sítios** (grep) — bugs repetem-se.
+- Ask "why?" until you reach something that, if changed, makes the bug impossible ("5 whys").
+- Avoid *patches* that hide it (empty try/catch, `if` for the specific case, sleep, blind retry).
+- Look for the **same pattern elsewhere** (grep) — bugs repeat.
 
-## 6. Provar
+## 6. Prove it
 
-- Teste de regressão que falhava e agora passa (skill `testing-verification`).
-- `bash scripts/check.sh` verde; reproduz o cenário original e confirma.
-- Regista em `BUGS.md`: sintoma, causa raiz, correção (commit), teste. Commit `fix(scope): …` com `Refs: B-NNN`.
+- Regression test that failed before and now passes (skill `testing-verification`).
+- `bash scripts/check.sh` green; reproduce the original scenario and confirm.
+- Record in `BUGS.md`: symptom, root cause, fix (commit), test. Commit `fix(scope): …` with `Refs: B-NNN`.
 
-## Quando a tua correção não funcionou
+## When your fix didn't work
 
-Diz-o claramente (no registo e na mensagem final) e acrescenta o **diagnóstico**: o que tentaste, o output real, que hipóteses ficam excluídas e porquê. **Não repitas a mesma abordagem uma 3.ª vez.** Muda de ângulo: outra hipótese, outra ferramenta, outro nível (rede, SO, versão, cache), ou questiona o pressuposto de que "o problema está onde estou a olhar".
+Say so clearly (in the record and in the final message) and add the **diagnosis**: what you tried, the actual output, which hypotheses are ruled out and why. **Don't repeat the same approach a 3rd time.** Change angle: another hypothesis, another tool, another level (network, OS, version, cache), or question the assumption that "the problem is where I'm looking".
 
-## Armadilhas comuns
+## Common traps
 
-| Sintoma | Suspeita rápida |
+| Symptom | Quick suspicion |
 |---------|-----------------|
-| "Funciona na minha máquina" | versões, variáveis de ambiente, ficheiros não commitados, caminhos absolutos, maiúsculas/minúsculas |
-| Só falha às vezes | concorrência, tempo, ordem de testes, estado partilhado, aleatoriedade sem *seed* |
-| Mudou sem eu mexer | atualização de dependência, cache, dados, relógio/timezone |
-| Erro enorme e confuso | procura a **primeira** linha de erro; o resto é consequência |
-| Correção "óbvia" não resolve | estás a olhar para o sítio errado; confirma que o teu código está mesmo a correr (build antigo? cache?) |
-| Memória/CPU a crescer | recursos não libertados, listeners, caches sem limite, loops de eventos |
+| "Works on my machine" | versions, environment variables, uncommitted files, absolute paths, case sensitivity |
+| Only fails sometimes | concurrency, timing, test order, shared state, randomness without a *seed* |
+| Changed without me touching it | dependency update, cache, data, clock/timezone |
+| Huge confusing error | look for the **first** error line; the rest is a consequence |
+| "Obvious" fix doesn't resolve it | you're looking in the wrong place; confirm your code is actually running (stale build? cache?) |
+| Memory/CPU growing | unreleased resources, listeners, unbounded caches, event loops |
 
-## Limites de tempo
+## Time limits
 
-2 tentativas falhadas na mesma linha de investigação → muda de estratégia. 30+ min sem progresso → regista o estado em `BUGS.md` (reprodução, hipóteses excluídas), marca a tarefa bloqueada e avança. Nunca deixes o repo partido.
+2 failed attempts on the same line of investigation → change strategy. 30+ min without progress → record the state in `BUGS.md` (reproduction, ruled-out hypotheses), mark the task blocked and move on. Never leave the repo broken.

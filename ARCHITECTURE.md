@@ -1,52 +1,52 @@
 # ARCHITECTURE — {{PROJECT_NAME}}
 
-> Como o sistema está organizado **hoje** (não como gostaríamos). Atualizar no mesmo commit que muda a estrutura.
-> Se este documento contradiz o código, o código manda — corrige o documento.
+> How the system is organised **today** (not how we would like it to be). Update in the same commit that changes the structure.
+> If this document contradicts the code, the code wins — fix the document.
 
-## Visão geral
+## Overview
 
-<!-- Um parágrafo + diagrama simples (ASCII ou Mermaid). -->
-_A preencher com `/bootstrap`._
+<!-- One paragraph + simple diagram (ASCII or Mermaid). -->
+_To be filled in with `/bootstrap`._
 
 ```mermaid
 flowchart LR
-    A[Entrada] --> B[Núcleo] --> C[Saída]
+    A[Input] --> B[Core] --> C[Output]
 ```
 
-## Estrutura de pastas
+## Folder structure
 
 ```
 src/
   ...
 ```
 
-## Módulos e responsabilidades
+## Modules and responsibilities
 
-| Módulo | Responsabilidade | Depende de | Notas |
-|--------|------------------|------------|-------|
-| _a preencher_ | | | |
+| Module | Responsibility | Depends on | Notes |
+|--------|----------------|------------|-------|
+| _to be filled in_ | | | |
 
-**Regra de dependências:** _ex.: `ui → app → domain`; `domain` não importa nada de fora._
+**Dependency rule:** _e.g.: `ui → app → domain`; `domain` imports nothing from outside._
 
-Catálogo de funções/componentes reutilizáveis: `docs/MODULES.md`. Cada módulo tem o seu `README.md`.
+Catalogue of reusable functions/components: `docs/MODULES.md`. Each module has its own `README.md`.
 
-## Fluxos principais
+## Main flows
 
-1. _ex.: Utilizador faz X → módulo A valida → módulo B persiste → resposta_
+1. _e.g.: User does X → module A validates → module B persists → response_
 
-## Dados e persistência
+## Data and persistence
 
-_Modelos principais, onde e como são guardados, migrações._
+_Core models, where and how they are stored, migrations._
 
-## Integrações externas
+## External integrations
 
-| Serviço/API | Para quê | Configuração (variáveis) | Falha → comportamento |
+| Service/API | What for | Configuration (variables) | Failure → behaviour |
 |-------------|----------|--------------------------|------------------------|
 
-## Decisões relevantes
+## Relevant decisions
 
-Ver `DECISIONS.md` (referenciar D-NNN aqui).
+See `DECISIONS.md` (reference D-NNN here).
 
-## Limitações e dívida técnica conhecidas
+## Known limitations and technical debt
 
-_Lista curta e honesta._
+_Short and honest list._

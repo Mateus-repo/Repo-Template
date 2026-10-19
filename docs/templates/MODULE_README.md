@@ -1,32 +1,32 @@
-# <nome-do-módulo>
+# <module-name>
 
-> <Uma frase: o que este módulo faz.>
+> <One sentence: what this module does.>
 
-**Não faz:** <limites explícitos — o que fica fora deste módulo e onde vive>.
+**Does not do:** <explicit limits — what falls outside this module and where it lives>.
 
-## API pública
+## Public API
 
-Ponto de entrada: `<caminho/index>`. Tudo o resto é interno e **não** deve ser importado de fora.
+Entry point: `<path/index>`. Everything else is internal and **should not** be imported from outside.
 
-| Símbolo | Assinatura | Descrição | Erros |
+| Symbol | Signature | Description | Errors |
 |---------|------------|-----------|-------|
-| `exemplo()` | `exemplo(x: T, opts?: Opts): R` | O que faz, numa linha | `ErroX` se … |
+| `example()` | `example(x: T, opts?: Opts): R` | What it does, in one line | `ErrorX` if … |
 
-## Exemplo de uso
+## Usage example
 
 ```
-// o exemplo mais pequeno que mostra o caso típico (deve correr de facto)
+// the smallest example that shows the typical case (must actually run)
 ```
 
-## Dependências
+## Dependencies
 
-- **Permitidas:** <módulos/bibliotecas de que depende>.
-- **Proibidas:** <ex.: UI, framework web, acesso direto a BD>.
+- **Allowed:** <modules/libraries it depends on>.
+- **Forbidden:** <e.g.: UI, web framework, direct DB access>.
 
-## Notas e limitações
+## Notes and limitations
 
-- <decisões relevantes (ref. D-NNN), casos-limite, desempenho, thread-safety>.
+- <relevant decisions (ref. D-NNN), edge cases, performance, thread-safety>.
 
-## Testes
+## Tests
 
-`<comando para correr só os testes deste módulo>` — testes sobre a API pública em `<caminho>`.
+`<command to run only this module's tests>` — tests on the public API in `<path>`.

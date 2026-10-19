@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Relógio da sessão autónoma. O agente não sente o tempo passar — usa isto.
-#   bash scripts/clock.sh          -> mostra decorrido / restante
-#   bash scripts/clock.sh reset    -> reinicia
-# Orçamento: autopilot.state (budget_min) > $AUTONOMY_BUDGET_MIN > 120
+# Clock for the autonomous session. The agent does not feel time passing — use this.
+#   bash scripts/clock.sh          -> shows elapsed / remaining
+#   bash scripts/clock.sh reset    -> restarts
+# Budget: autopilot.state (budget_min) > $AUTONOMY_BUDGET_MIN > 120
 set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 mkdir -p .opencode
@@ -23,6 +23,6 @@ fi
 
 el=$(( (now - start) / 60 ))
 rem=$(( budget - el ))
-echo "agora: $(date '+%Y-%m-%d %H:%M')"
-echo "decorrido: ${el} min · orçamento: ${budget} min · restante: ${rem} min"
-if (( rem <= 0 )); then echo "ORÇAMENTO ESGOTADO → faz handoff (skill session-handoff)."; fi
+echo "now: $(date '+%Y-%m-%d %H:%M')"
+echo "elapsed: ${el} min · budget: ${budget} min · remaining: ${rem} min"
+if (( rem <= 0 )); then echo "BUDGET SPENT → do a handoff (skill session-handoff)."; fi

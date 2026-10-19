@@ -1,10 +1,10 @@
 ---
-description: Auto-revisão do trabalho recente → REVIEW.md (e corrige os blockers)
+description: Self-review of recent work → REVIEW.md (and fix the blockers)
 ---
-Usa a skill `code-review` para rever: $ARGUMENTS (se vazio: alterações desde o último milestone/revisão).
+Use the skill `code-review` to review: $ARGUMENTS (if empty: changes since the last milestone/review).
 
-Estado do git:
+Git state:
 !`git log --oneline -15`
 !`git diff --stat HEAD~5..HEAD 2>/dev/null | tail -20`
 
-Regista a revisão em `REVIEW.md`, corrige tudo o que for `blocker`/`major` simples, abre tarefas em `TODO.md` para o resto e manda ideias para `IDEAS.md`. Para uma segunda opinião independente, delega no subagente `@reviewer`.
+Register the review in `REVIEW.md`, fix anything that's a simple `blocker`/`major`, open tasks in `TODO.md` for the rest and send ideas to `IDEAS.md`. For an independent second opinion, delegate to the subagent `@reviewer`.

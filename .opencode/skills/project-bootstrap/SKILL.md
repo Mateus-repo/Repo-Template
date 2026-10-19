@@ -1,58 +1,58 @@
 ---
 name: project-bootstrap
-description: Configurar um projeto novo ou um template acabado de copiar — detetar a stack, preencher comandos em AGENTS.md, ARCHITECTURE.md, docs/CONVENTIONS.md, README, ROADMAP e TODO iniciais, garantir que scripts/check.sh funciona e ficar pronto para trabalho autónomo. Usa SEMPRE quando o utilizador pedir /bootstrap, quando AGENTS.md ainda tiver comandos "TODO" ou placeholders {{...}}, quando o repo estiver vazio/novo, ou ao adotar este template num projeto existente.
+description: Set up a new project or a template just copied — detect the stack, fill in commands in AGENTS.md, ARCHITECTURE.md, docs/CONVENTIONS.md, README, ROADMAP and the initial TODO, make sure scripts/check.sh works and get ready for autonomous work. ALWAYS use when the user asks for /bootstrap, when AGENTS.md still has "TODO" commands or {{...}} placeholders, when the repo is empty/new, or when adopting this template in an existing project.
 ---
 
 # Project bootstrap
 
-Objetivo: em ~15–30 min, passar de "template com placeholders" a "projeto pronto para trabalho autónomo, com comandos reais e plano inicial".
+Goal: in ~15–30 min, go from "template with placeholders" to "project ready for autonomous work, with real commands and an initial plan".
 
-## Passos
+## Steps
 
-### 1. Reconhecer o terreno
-- Existe código? `ls`, ficheiros de manifesto (`package.json`, `pyproject.toml`, `Cargo.toml`, `go.mod`, `*.csproj`/`*.sln`, `project.godot`, `pom.xml`, `build.gradle`…).
-- `git log --oneline | head`, README existente, issues/notas do utilizador (`$ARGUMENTS` do comando).
-- Projeto **vazio**: usa a descrição/stack dos placeholders em `README.md`/`AGENTS.md`. Se a stack é `por definir`, decide-a pelos 5 ângulos (`decide-without-asking`) com base no objetivo e regista em `DECISIONS.md` (ex.: `D-002 — Stack`).
+### 1. Get the lay of the land
+- Is there code? `ls`, manifest files (`package.json`, `pyproject.toml`, `Cargo.toml`, `go.mod`, `*.csproj`/`*.sln`, `project.godot`, `pom.xml`, `build.gradle`…).
+- `git log --oneline | head`, existing README, issues/user notes (`$ARGUMENTS` of the command).
+- **Empty** project: use the description/stack from the placeholders in `README.md`/`AGENTS.md`. If the stack is `to be defined`, decide it with the 5 angles (`decide-without-asking`) based on the goal and record it in `DECISIONS.md` (e.g. `D-002 — Stack`).
 
 ### 2. Placeholders
-Se ainda existirem `{{PROJECT_NAME}}`, `{{DESCRIPTION}}`, `{{STACK}}`, `{{DATE}}` nos `.md` da raiz/`docs/`: corre `bash scripts/init.sh "Nome" "Descrição" "Stack"` (se tiver a informação) ou substitui à mão. Datas com `date +%Y-%m-%d`.
+If `{{PROJECT_NAME}}`, `{{DESCRIPTION}}`, `{{STACK}}`, `{{DATE}}` still exist in the root `.md`/`docs/`: run `bash scripts/init.sh "Name" "Description" "Stack"` (if you have the information) or replace them by hand. Dates via `date +%Y-%m-%d`.
 
-### 3. Comandos reais
-Descobre e **testa de facto** cada comando (instalar, correr, build, testes, lint). Preenche a tabela em `AGENTS.md §1` e `docs/TESTING.md`. Se algum não existir, cria a tarefa em `TODO.md` para o adicionar (ex.: configurar linter/formatter).
+### 3. Real commands
+Find out and **actually test** every command (install, run, build, tests, lint). Fill in the table in `AGENTS.md §1` and `docs/TESTING.md`. If one doesn't exist, create the task in `TODO.md` to add it (e.g. set up a linter/formatter).
 
 ### 4. `scripts/check.sh`
-`bash scripts/check.sh` deteta stacks comuns. Corre-o: se não cobre o projeto (monorepo, stack rara), cria `scripts/check.local.sh` com os passos reais (lint → typecheck → test → build) e `exit` não-zero em falha. Tem de ser **rápido** e **determinístico**.
+`bash scripts/check.sh` detects common stacks. Run it: if it doesn't cover the project (monorepo, unusual stack), create `scripts/check.local.sh` with the real steps (lint → typecheck → test → build) and a non-zero `exit` on failure. It must be **fast** and **deterministic**.
 
-### 5. Documentos
-- `ARCHITECTURE.md`: estrutura de pastas real, módulos, fluxos, dependências (ou o plano inicial, se vazio).
-- `docs/CONVENTIONS.md`: formatter/linter, nomes e estrutura **deduzidos do código existente**; não impor o que o projeto não usa. Secção da stack preenchida.
-- `README.md`: o que faz, como correr, estrutura. Sem inventar funcionalidades que não existem.
-- `docs/DESIGN.md`: se tem UI, preenche a direção e tokens a partir do que existe (ou propõe); se não tem UI, **apaga** o ficheiro e retira-o da tabela em `AGENTS.md §3`.
-- `docs/GLOSSARY.md`: termos do domínio já visíveis.
-- `docs/MODULES.md`: se já há código, cataloga módulos e funções reutilizáveis existentes; se é vazio, deixa o cabeçalho. Cria `README.md` nos módulos principais (modelo `docs/templates/MODULE_README.md`).
-- **Estrutura:** compara as pastas reais com a skill `project-structure`; se estiver desorganizada, **não reorganizes tudo agora** — cria tarefas em `TODO.md` (uma por módulo). Define em `ARCHITECTURE.md` a regra de dependências e onde vive o código partilhado.
-- `.gitignore`/`.editorconfig`: ajusta à stack (ex.: `bin/`, `obj/`, `.godot/`).
-- `.env.example` se há configuração por ambiente.
+### 5. Documents
+- `ARCHITECTURE.md`: the real folder structure, modules, flows, dependencies (or the initial plan, if empty).
+- `docs/CONVENTIONS.md`: formatter/linter, names and structure **deduced from the existing code**; don't impose what the project doesn't use. Stack section filled in.
+- `README.md`: what it does, how to run it, structure. No inventing features that don't exist.
+- `docs/DESIGN.md`: if it has UI, fill in the direction and the tokens from what exists (or propose them); if it has no UI, **delete** the file and remove it from the table in `AGENTS.md §3`.
+- `docs/GLOSSARY.md`: domain terms already visible.
+- `docs/MODULES.md`: if there's already code, catalog the existing reusable modules and functions; if it's empty, leave the header. Create `README.md` in the main modules (template `docs/templates/MODULE_README.md`).
+- **Structure:** compare the real folders with the `project-structure` skill; if it's disorganized, **don't reorganize everything now** — create tasks in `TODO.md` (one per module). Define the dependency rule and where shared code lives in `ARCHITECTURE.md`.
+- `.gitignore`/`.editorconfig`: adjust to the stack (e.g. `bin/`, `obj/`, `.godot/`).
+- `.env.example` if there's per-environment configuration.
 
-### 6. Roadmap e fila inicial
-- `ROADMAP.md`: visão em 1–3 frases, princípios, fora de escopo, M0 (fundações) e M1 (MVP) com critérios mensuráveis. Se o utilizador não definiu direção, propõe uma **versão provisória** e marca-a como tal (`DECISIONS.md` → `Provisória`).
-- `TODO.md`: 5–15 tarefas S/M com aceitação (skill `planning`), a primeira já em *Agora*. Substitui a tarefa `T-001` (bootstrap) marcando-a feita.
+### 6. Roadmap and initial queue
+- `ROADMAP.md`: vision in 1–3 sentences, principles, out of scope, M0 (foundations) and M1 (MVP) with measurable criteria. If the user hasn't set a direction, propose a **provisional version** and mark it as such (`DECISIONS.md` → `Provisional`).
+- `TODO.md`: 5–15 S/M tasks with acceptance (skill `planning`), the first already in *Now*. Replace the `T-001` (bootstrap) task by marking it done.
 
-### 7. Linha de base
-`bash scripts/check.sh` → regista o estado em `PROGRESS.md › Estado atual` (build/testes) e, se houver falhas pré-existentes, em `BUGS.md`. Commit: `chore: bootstrap project configuration`.
+### 7. Baseline
+`bash scripts/check.sh` → record the state in `PROGRESS.md › Current state` (build/tests) and, if there are pre-existing failures, in `BUGS.md`. Commit: `chore: bootstrap project configuration`.
 
-### 8. Perguntas (só as essenciais)
-Se, depois dos 5 ângulos, houver ambiguidade de produto que bloqueia o M1, escreve-a em `QUESTIONS.md` com recomendação por defeito — e **continua** com o que não depende dela.
+### 8. Questions (only the essential ones)
+If, after the 5 angles, there's product ambiguity that blocks M1, write it in `QUESTIONS.md` with a default recommendation — and **continue** with what doesn't depend on it.
 
-## Critério de "pronto"
+## "Done" criteria
 
-- [ ] Nenhum `{{...}}` nos documentos preenchíveis; comandos em `AGENTS.md` sem `TODO` (ou com tarefa associada).
-- [ ] `bash scripts/check.sh` corre e o resultado está registado.
-- [ ] `ARCHITECTURE.md`, `ROADMAP.md`, `TODO.md` refletem a realidade.
-- [ ] `docs/MODULES.md` preenchido (ou cabeçalho pronto) e regra de estrutura/dependências definida.
-- [ ] Primeira tarefa em *Agora* tem aceitação verificável.
-- [ ] Commit feito; resumo curto ao utilizador (stack, comandos, milestones, perguntas).
+- [ ] No `{{...}}` in documents ready to fill in; commands in `AGENTS.md` without `TODO` (or with an associated task).
+- [ ] `bash scripts/check.sh` runs and the result is recorded.
+- [ ] `ARCHITECTURE.md`, `ROADMAP.md`, `TODO.md` reflect reality.
+- [ ] `docs/MODULES.md` filled in (or header ready) and structure/dependency rule defined.
+- [ ] First task in *Now* has verifiable acceptance.
+- [ ] Commit made; short summary to the user (stack, commands, milestones, questions).
 
-## Adotar o template num projeto existente
+## Adopting the template in an existing project
 
-Copia `.opencode/`, `scripts/`, `opencode.json`, os `.md` de gestão e `docs/`. **Não** sobrescrevas README/.gitignore existentes — faz *merge*. Extrai estado atual do projeto para `PROGRESS.md`/`ARCHITECTURE.md` e transforma backlog existente em `TODO.md`.
+Copy `.opencode/`, `scripts/`, `opencode.json`, the management `.md` files and `docs/`. **Don't** overwrite existing README/.gitignore — *merge* them. Extract the project's current state into `PROGRESS.md`/`ARCHITECTURE.md` and turn the existing backlog into `TODO.md`.

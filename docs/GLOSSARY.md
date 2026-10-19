@@ -1,7 +1,7 @@
-# Glossário — {{PROJECT_NAME}}
+# Glossary — {{PROJECT_NAME}}
 
-> Um termo, um significado. Usa estes nomes no código, nos docs e nas conversas.
+> One term, one meaning. Use these names in the code, the docs and in conversations.
 
-| Termo | Definição | Nome no código |
+| Term | Definition | Name in code |
 |-------|-----------|----------------|
-| _a preencher_ | | |
+| _to be filled in_ | | |

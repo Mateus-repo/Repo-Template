@@ -1,9 +1,9 @@
 ---
-description: Ritual de arranque de sessão e início imediato do trabalho
+description: Session start ritual and immediate start of work
 ---
-Executa o ritual de arranque do `AGENTS.md` §2 (usa a skill `session-handoff`, parte "Arranque").
+Run the start ritual in `AGENTS.md` §2 (use the skill `session-handoff`, part "Startup").
 
-Resultado do arranque:
+Start result:
 !`bash scripts/session-start.sh`
 
-Depois de leres `PROGRESS.md`, `QUESTIONS.md`, `TODO.md` e `ROADMAP.md`, começa já a próxima tarefa da fila. Foco extra (opcional): $ARGUMENTS
+After reading `PROGRESS.md`, `QUESTIONS.md`, `TODO.md` and `ROADMAP.md`, start the next task in the queue right away. Extra focus (optional): $ARGUMENTS

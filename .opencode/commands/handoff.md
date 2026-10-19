@@ -1,4 +1,4 @@
 ---
-description: Fecha a sessão — atualiza docs, faz commit e resume
+description: Close the session — update docs, commit and summarize
 ---
-Usa a skill `session-handoff` (parte "Fim de sessão"): `bash scripts/check.sh`, atualizar `TODO.md`, `PROGRESS.md` (estado atual + entrada do diário), `DECISIONS.md`, `BUGS.md`, `CHANGELOG.md`; commit final; e resumo curto para mim (feito · decisões tuas · bloqueios · próximo passo).
+Use the skill `session-handoff` (part "End of session"): `bash scripts/check.sh`, update `TODO.md`, `PROGRESS.md` (current state + journal entry), `DECISIONS.md`, `BUGS.md`, `CHANGELOG.md`; final commit; and a short summary for me (done · your decisions · blockers · next step).

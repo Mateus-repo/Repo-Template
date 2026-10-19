@@ -1,33 +1,33 @@
 # MODULES — {{PROJECT_NAME}}
 
-> Catálogo de módulos e de funções/componentes **reutilizáveis**. É a primeira coisa a consultar **antes de escrever código novo** (skill `reusable-modules`) e a última a atualizar **antes de fechar uma tarefa** (skill `code-documentation`).
-> Procura rápida: `bash scripts/find-reuse.sh <termo> [termo…]`.
-> Regra: se é exportado e usado (ou utilizável) fora do seu ficheiro, tem linha aqui. Código e catálogo mudam no **mesmo commit**. Se discordam, o código manda.
+> **Catalog** of modules and functions/components that are **reusable**. The first thing to check **before writing new code** (skill `reusable-modules`) and the last thing to update **before closing a task** (skill `code-documentation`).
+> Quick search: `bash scripts/find-reuse.sh <term> [term…]`.
+> Rule: if it is exported and used (or usable) outside its file, it gets a row here. Code and catalog change in the **same commit**. When they disagree, the code wins.
 
-## Módulos
+## Modules
 
-| Módulo | Caminho | Propósito (1 frase) | API pública (resumo) | Depende de |
+| Module | Path | Purpose (1 sentence) | Public API (summary) | Depends on |
 |--------|---------|---------------------|----------------------|------------|
-| _a preencher_ | | | | |
+| _to be filled in_ | | | | |
 
-## Funções, tipos e componentes reutilizáveis
+## Reusable functions, types and components
 
-Agrupa por **conceito** (texto, datas, validação, ficheiros, HTTP…), não por ficheiro.
+Group by **concept** (text, dates, validation, files, HTTP…), not by file.
 
-| Nome | Caminho | Assinatura | O que faz | Pura? | Erros | Usado por |
+| Name | Path | Signature | What it does | Pure? | Errors | Used by |
 |------|---------|------------|-----------|-------|-------|-----------|
-| _a preencher_ | | | | | | |
+| _to be filled in_ | | | | | | |
 
-<!-- Exemplo de linha:
-| `chunk` | `src/shared/lists/chunk.ts` | `chunk<T>(items: T[], size: number): T[][]` | Divide uma lista em blocos de tamanho fixo | sim | `RangeError` se `size` ≤ 0 | `billing`, `export` |
+<!-- Example row:
+| `chunk` | `src/shared/lists/chunk.ts` | `chunk<T>(items: T[], size: number): T[][]` | Splits a list into fixed-size blocks | yes | `RangeError` if `size` ≤ 0 | `billing`, `export` |
 -->
 
-## Duplicações conhecidas (a resolver)
+## Known duplications (to resolve)
 
-_Código semelhante que ainda não foi unificado, com a tarefa associada (`T-NNN`). Vazio é o objetivo._
+_Similar code that has not been unified yet, with the associated task (`T-NNN`). Empty is the goal._
 
-## Convenções do catálogo
+## Catalog conventions
 
-- Remove a linha quando remove o código. Não deixes entradas órfãs.
-- Mudou a assinatura ou os erros → atualiza a linha **e** a docstring **e** o README do módulo.
-- Função privada (só usada no próprio módulo) **não** entra aqui.
+- Remove the row when you remove the code. Don't leave orphan entries.
+- Signature or errors changed → update the row **and** the docstring **and** the module's README.
+- A private function (used only inside its own module) does **not** go here.

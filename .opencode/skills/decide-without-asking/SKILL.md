@@ -1,68 +1,68 @@
 ---
 name: decide-without-asking
-description: Método de decisão em 5 ângulos para resolver dúvidas sozinho antes de perguntar ao utilizador. Usa SEMPRE que sentires vontade de fazer uma pergunta, tiveres duas ou mais opções, requisitos ambíguos, uma escolha de design/biblioteca/estrutura, ou quando o utilizador usar /decide. Obriga a analisar precedente, intenção, evidência externa, risco/reversibilidade e simplicidade, e a registar a decisão. Só termina em pergunta ao utilizador se for um bloqueio real.
+description: 5-angle decision method for resolving doubts on your own before asking the user. ALWAYS use whenever you feel like asking a question, have two or more options, ambiguous requirements, a design/library/structure choice, or when the user uses /decide. Forces you to analyze precedent, intent, external evidence, risk/reversibility and simplicity, and to record the decision. Only ends in a question to the user if it is a real blocker.
 ---
 
-# Decide without asking — os 5 ângulos
+# Decide without asking — the 5 angles
 
-Objetivo: transformar "não sei, pergunto" em "analisei de 5 maneiras e decidi — ou sei exatamente o que perguntar".
+Goal: turn "I don't know, I'll ask" into "I analyzed it 5 ways and decided — or I know exactly what to ask".
 
-## Passo 0 — É mesmo uma decisão?
+## Step 0 — Is it really a decision?
 
-Se a resposta está no código, nos docs, no `git log`, em `DECISIONS.md` ou na documentação oficial → **vai ler**. Muitas "dúvidas" acabam aqui.
+If the answer is in the code, the docs, `git log`, `DECISIONS.md` or the official documentation → **go read**. Many "doubts" end here.
 
-## Passo 1 — Formula a questão e as opções
+## Step 1 — Frame the question and the options
 
-Uma frase para a questão. 2–4 opções reais (inclui "não fazer nada" e "a mais simples").
+One sentence for the question. 2–4 real options (include "do nothing" and "the simplest one").
 
-## Passo 2 — Os 5 ângulos (1–3 linhas cada, por opção quando relevante)
+## Step 2 — The 5 angles (1–3 lines each, per option when relevant)
 
-1. **Precedente** — O que o repo já faz? Há padrão, convenção, decisão anterior (`DECISIONS.md`, `docs/CONVENTIONS.md`, `git log`, código vizinho)? Consistência vence quase sempre.
-2. **Intenção** — Que objetivo do utilizador isto serve (`README`, `ROADMAP`, `PROGRESS`, mensagens, respostas anteriores em `QUESTIONS.md`)? Qual opção ele escolheria? Qual o *espírito* do pedido, não só a letra?
-3. **Evidência externa** — O que dizem a documentação oficial, o ecossistema, benchmarks, issues conhecidos? (skill `research-first`.) Não assumas APIs de memória.
-4. **Risco e reversibilidade** — Pior caso se estiver errado? Custo de desfazer (minutos vs. dias)? Toca em dados, segurança, dinheiro, API pública? **Barato e reversível → decide já.**
-5. **Simplicidade e custo** — Qual cumpre os requisitos com menos partes móveis e menos código? **Pré-mortem:** "daqui a um mês esta opção falhou — porquê?" Para cada opção, o motivo mais provável.
+1. **Precedent** — What does the repo already do? Is there a pattern, convention, previous decision (`DECISIONS.md`, `docs/CONVENTIONS.md`, `git log`, neighbouring code)? Consistency almost always wins.
+2. **Intent** — Which user goal does this serve (`README`, `ROADMAP`, `PROGRESS`, messages, earlier answers in `QUESTIONS.md`)? Which option would they pick? What is the *spirit* of the request, not just the letter?
+3. **External evidence** — What do the official documentation, the ecosystem, benchmarks, known issues say? (skill `research-first`.) Don't assume APIs from memory.
+4. **Risk and reversibility** — Worst case if it's wrong? Cost to undo (minutes vs. days)? Does it touch data, security, money, the public API? **Cheap and reversible → decide now.**
+5. **Simplicity and cost** — Which one meets the requirements with fewer moving parts and less code? **Pre-mortem:** "a month from now this option failed — why?" For each option, the most likely reason.
 
-*Opcional para decisões grandes:* delega o plano no subagente `@critic` (advogado do diabo) para um 6.º olhar.
+*Optional for big decisions:* delegate the plan to the `@critic` subagent (devil's advocate) for a 6th look.
 
-## Passo 3 — Pontuar e decidir
+## Step 3 — Score and decide
 
-| Opção | Precedente | Intenção | Evidência | Risco (↓ melhor) | Simplicidade | Total |
+| Option | Precedent | Intent | Evidence | Risk (↓ better) | Simplicity | Total |
 |-------|-----------|----------|-----------|------------------|--------------|-------|
 | A | | | | | | |
 
-Escala 0–2 por ângulo (risco: 2 = baixo). Não é matemática — é uma forma de ver se **um** ângulo domina ou se há empate.
+Scale 0–2 per angle (risk: 2 = low). It isn't math — it's a way of seeing whether **one** angle dominates or there's a tie.
 
-- **Uma opção claramente à frente (ou confiança ~70%+)** → decide.
-- **Empate e reversível** → escolhe a mais simples e reversível; ou faz um **spike** ≤ 15 min para ganhar evidência.
-- **Empate e irreversível/alto impacto** → possível bloqueio real (Passo 5).
+- **One option clearly ahead (or ~70%+ confidence)** → decide.
+- **Tie and reversible** → pick the simplest and most reversible; or run a **spike** ≤ 15 min to gain evidence.
+- **Tie and irreversible/high impact** → possible real blocker (Step 5).
 
-## Passo 4 — Registar e seguir
+## Step 4 — Record and move on
 
-Escreve em `DECISIONS.md` (`D-NNN`): contexto, opções, 5 ângulos numa linha cada, decisão, **pressupostos**, **como reverter**. Estado `Provisória` se assumiste algo sobre o que o utilizador quer. Depois continua o trabalho.
+Write it in `DECISIONS.md` (`D-NNN`): context, options, the 5 angles one line each, decision, **assumptions**, **how to revert**. Status `Provisional` if you assumed something about what the user wants. Then continue the work.
 
-## Passo 5 — Quando é mesmo um bloqueio
+## Step 5 — When it really is a blocker
 
-Só perguntas se, depois dos 5 ângulos, se verifica **um** de:
-- precisas de credenciais/acessos/segredos que não tens;
-- ação destrutiva, irreversível ou com custo financeiro;
-- ambiguidade de **produto** que muda substancialmente o resultado e os ângulos 1–2 não decidem;
-- contradiz uma instrução explícita do utilizador;
-- sai do âmbito do repo (publicar, enviar, apagar dados de terceiros).
+Only ask if, after the 5 angles, **one** of these holds:
+- you need credentials/access/secrets you don't have;
+- destructive, irreversible action or one with a financial cost;
+- **product** ambiguity that substantially changes the outcome and angles 1–2 don't settle it;
+- it contradicts an explicit instruction from the user;
+- it goes outside the repo's scope (publishing, sending, deleting third-party data).
 
-Como perguntar bem (`QUESTIONS.md`, `Q-NNN`):
-- Contexto em 1–2 linhas e o que ficou **já tentado** (os 5 ângulos, resumidos).
-- Opções fechadas (A/B/C), não "o que achas?".
-- **Recomendação por defeito** + "farei isto se não houver resposta".
-- O que fica bloqueado e o que farás entretanto.
-- Agrupa várias perguntas num lote.
+How to ask well (`QUESTIONS.md`, `Q-NNN`):
+- Context in 1–2 lines and what has **already been tried** (the 5 angles, summarized).
+- Closed options (A/B/C), not "what do you think?".
+- **Default recommendation** + "I'll do this if there's no answer".
+- What stays blocked and what you'll do in the meantime.
+- Group several questions into one batch.
 
-Depois: marca as tarefas dependentes como bloqueadas e **continua com outras**.
+Then: mark dependent tasks as blocked and **move on to others**.
 
-## Anti-padrões
+## Anti-patterns
 
-- Perguntar para "confirmar" algo que já decidiste bem.
-- Perguntar o que se resolve lendo 3 ficheiros.
-- Fazer a mesma pergunta de 3 maneiras.
-- Decidir em silêncio (sem registo) — a decisão desaparece.
-- Paralisar por escolhas pequenas: nomes, ordem, formatação → decide em 10 segundos.
+- Asking to "confirm" something you already decided well.
+- Asking what reading 3 files would resolve.
+- Asking the same question 3 different ways.
+- Deciding in silence (no record) — the decision disappears.
+- Paralysis over small choices: names, order, formatting → decide in 10 seconds.

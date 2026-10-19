@@ -1,6 +1,6 @@
 ---
-description: Decompõe um objetivo em tarefas com critérios de aceitação e atualiza o TODO.md
+description: Breaks a goal down into tasks with acceptance criteria and updates TODO.md
 ---
-Usa a skill `planning` para decompor este objetivo: $ARGUMENTS
+Use the skill `planning` to break down this goal: $ARGUMENTS
 
-Atualiza `TODO.md` (com IDs, prioridade, tamanho e critérios de aceitação) e, se mexer na direção do projeto, propõe a alteração ao `ROADMAP.md`. Não implementes nada. Devolve só o plano resumido (máx. 15 linhas).
+Update `TODO.md` (with IDs, priority, size and acceptance criteria) and, if it changes the project's direction, propose the change to `ROADMAP.md`. Implement nothing. Return only the summarized plan (max 15 lines).

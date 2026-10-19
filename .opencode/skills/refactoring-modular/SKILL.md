@@ -1,63 +1,63 @@
 ---
 name: refactoring-modular
-description: Escrever código modular e refatorar com segurança — responsabilidades claras, ficheiros e funções pequenas, baixo acoplamento, sem duplicação — sem mudar comportamento. Usa SEMPRE que um ficheiro passar das ~300 linhas, uma função das ~40, houver duplicação, acoplamento forte, "god objects", antes de adicionar uma funcionalidade a código confuso, ao desenhar a estrutura de um módulo novo, ou quando o utilizador pedir para organizar, limpar ou modularizar código.
+description: Write modular code and refactor safely — clear responsibilities, small files and functions, low coupling, no duplication — without changing behavior. ALWAYS use when a file passes ~300 lines, a function passes ~40, there is duplication, tight coupling, "god objects", before adding a feature to confusing code, when designing the structure of a new module, or when the user asks to organize, clean up, or modularize code.
 ---
 
 # Refactoring & modular code
 
-Refactor = mudar **estrutura** mantendo **comportamento**. Se o comportamento muda, não é refactor.
+Refactor = change **structure** while keeping **behavior**. If the behavior changes, it's not a refactor.
 
-Ver também: `reusable-modules` (desenhar para reutilização), `project-structure` (onde vive cada coisa) e `code-documentation` (README e docstrings a acompanhar a mudança).
+See also: `reusable-modules` (designing for reuse), `project-structure` (where everything lives), and `code-documentation` (READMEs and docstrings keeping up with the change).
 
-## Princípios de código modular
+## Principles of modular code
 
-- **Uma responsabilidade por módulo/função** ("e" na descrição = dois módulos).
-- **Fronteiras explícitas:** cada módulo expõe uma interface pequena e esconde o resto.
-- **Dependências numa direção** (ex.: `ui → app → domain`). O domínio não conhece UI, BD ou framework.
-- **Dados à volta, efeitos nas bordas:** lógica pura no centro (fácil de testar); I/O, rede, UI e estado global nas margens.
-- **Composição > herança.** **Nomes > comentários.** **Pequeno > esperto.**
-- Referências (não dogmas): função < ~40 linhas · ficheiro < ~300 linhas · ≤ 4 parâmetros · aninhamento ≤ 3 níveis.
+- **One responsibility per module/function** ("and" in the description = two modules).
+- **Explicit boundaries:** each module exposes a small interface and hides the rest.
+- **Dependencies in one direction** (e.g. `ui → app → domain`). The domain knows nothing about UI, DB, or framework.
+- **Data in the middle, effects at the edges:** pure logic at the center (easy to test); I/O, network, UI, and global state at the margins.
+- **Composition > inheritance.** **Names > comments.** **Small > clever.**
+- References (not dogmas): function < ~40 lines · file < ~300 lines · ≤ 4 parameters · nesting ≤ 3 levels.
 
-## Sinais de que é preciso refatorar (code smells)
+## Signs that it's time to refactor (code smells)
 
-| Smell | Remédio |
+| Smell | Remedy |
 |-------|---------|
-| Função/ficheiro enorme | Extrair função/módulo por responsabilidade |
-| Duplicação (3+ vezes) | Extrair função/componente comum (não antes de 2–3 casos reais) |
-| Muitos parâmetros | Objeto de parâmetros / tipo próprio |
-| `if/switch` repetido por tipo | Polimorfismo / tabela de despacho |
-| Nomes vagos (`data`, `manager`, `utils`) | Renomear pelo que **é** ou **faz** |
-| Pasta `utils`/`helpers` a crescer | Mover para o módulo dono do conceito |
-| Estado global / singletons por todo o lado | Passar dependências explicitamente |
-| Ciclos de dependência | Extrair a parte comum para um terceiro módulo; inverter dependência |
-| Comentários a explicar código confuso | Reescrever o código; deixar comentário só para o *porquê* |
-| Código morto / flags esquecidas | Apagar (o git guarda o histórico) |
+| Giant function/file | Extract a function/module per responsibility |
+| Duplication (3+ times) | Extract a shared function/component (not before 2–3 real cases) |
+| Too many parameters | Options object / dedicated type |
+| Repeated `if/switch` by type | Polymorphism / dispatch table |
+| Vague names (`data`, `manager`, `utils`) | Rename for what it **is** or **does** |
+| Growing `utils`/`helpers` folder | Move it to the module that owns the concept |
+| Global state / singletons everywhere | Pass dependencies explicitly |
+| Dependency cycles | Extract the shared part into a third module; invert the dependency |
+| Comments explaining confusing code | Rewrite the code; keep comments only for the *why* |
+| Dead code / forgotten flags | Delete it (git keeps the history) |
 
-## Procedimento seguro
+## Safe procedure
 
-1. **Rede de segurança:** há testes a cobrir o código? Se não, escreve **testes de caracterização** (fixam o comportamento atual) antes de mexer. Sem testes possíveis → verificação manual escrita.
-2. `bash scripts/check.sh` verde **antes** de começar. Commit limpo de base (ou tag `before-refactor-<tema>`).
-3. **Passos pequenos**, cada um com check verde e commit próprio (`refactor(scope): …`). Mover → renomear → extrair → simplificar, **uma coisa de cada vez**.
-4. Nunca misturar refactor com mudança de comportamento ou correção de bug no mesmo commit.
-5. Reorganização grande: **estrangula** gradualmente (cria o novo caminho ao lado, migra chamadas, remove o antigo) em vez de reescrever tudo de uma vez.
-6. Atualiza `ARCHITECTURE.md` (módulos, dependências) e `DECISIONS.md` se mudou a estrutura.
-7. Se o check falhar e não perceberes porquê em ~2 tentativas: `git revert`/`git checkout` do passo e tenta um passo mais pequeno.
+1. **Safety net:** are there tests covering the code? If not, write **characterization tests** (they pin down the current behavior) before touching anything. No tests possible → written manual verification.
+2. `bash scripts/check.sh` green **before** starting. Clean baseline commit (or tag `before-refactor-<topic>`).
+3. **Small steps**, each with a green check and its own commit (`refactor(scope): …`). Move → rename → extract → simplify, **one thing at a time**.
+4. Never mix a refactor with a behavior change or bug fix in the same commit.
+5. Large reorganization: **strangle** gradually (build the new path alongside, migrate the calls, remove the old one) instead of rewriting everything at once.
+6. Update `ARCHITECTURE.md` (modules, dependencies) and `DECISIONS.md` if the structure changed.
+7. If the check fails and you can't figure out why after ~2 attempts: `git revert`/`git checkout` the step and try a smaller one.
 
-## Desenhar um módulo novo
+## Designing a new module
 
-1. Escreve em 1 frase **o que faz** e **o que não faz**.
-2. Define a **interface pública** mínima (funções/tipos) antes da implementação.
-3. Decide as dependências permitidas (segue a regra em `ARCHITECTURE.md`).
-4. Escreve o primeiro teste contra a interface.
-5. Estrutura típica: `modulo/` com `index` (API pública), ficheiros internos por responsabilidade, testes ao lado ou em `tests/`.
+1. Write **what it does** and **what it doesn't do** in one sentence.
+2. Define the minimal **public interface** (functions/types) before the implementation.
+3. Decide the allowed dependencies (follow the rule in `ARCHITECTURE.md`).
+4. Write the first test against the interface.
+5. Typical structure: `modulo/` with `index` (public API), internal files by responsibility, tests alongside or in `tests/`.
 
-## Quando NÃO refatorar
+## When NOT to refactor
 
-- Sem testes nem forma de verificar → primeiro cria a rede de segurança.
-- Código que vai ser apagado/substituído em breve.
-- A meio de uma funcionalidade ou bug — termina, commita, depois refatora.
-- "Por gosto": só refatora com motivo (vai mexer ali, está a atrasar, causa bugs).
+- No tests and no way to verify → build the safety net first.
+- Code that will be deleted/replaced soon.
+- Halfway through a feature or bug — finish it, commit, then refactor.
+- "For fun": only refactor with a reason (you're going to touch that spot anyway, it's slowing you down, it causes bugs).
 
-## Regra do escuteiro
+## Scout rule
 
-Deixa o código **ligeiramente melhor** do que o encontraste nas zonas por onde passas — mas em commits separados e sem alargar o âmbito da tarefa. Refactors maiores → tarefa própria em `TODO.md`.
+Leave the code **slightly better** than you found it in the areas you touch — but in separate commits and without widening the scope of the task. Bigger refactors → a dedicated task in `TODO.md`.

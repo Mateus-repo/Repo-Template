@@ -1,9 +1,9 @@
-# OpenCode (estado local)
+# OpenCode (local state)
 .opencode/.session-start
 .opencode/autopilot.state
 STOP
 
-# Segredos e ambiente
+# Secrets and environment
 .env
 .env.*
 !.env.example
@@ -13,7 +13,7 @@ STOP
 *.pfx
 credentials.json
 
-# Sistema / editores
+# System / editors
 .DS_Store
 Thumbs.db
 .idea/
@@ -22,7 +22,7 @@ Thumbs.db
 !.vscode/settings.json
 *.swp
 
-# Dependências e builds comuns
+# Dependencies and common builds
 node_modules/
 dist/
 build/

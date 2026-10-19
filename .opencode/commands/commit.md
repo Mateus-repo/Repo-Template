@@ -1,9 +1,9 @@
 ---
-description: Commits organizados (Conventional Commits) do trabalho pendente
+description: Tidy commits (Conventional Commits) of the pending work
 ---
-Usa a skill `auto-commit`.
+Use the skill `auto-commit`.
 
-Estado atual:
+Current state:
 !`git status --short`
 
-Corre `bash scripts/check.sh` primeiro. Se passar, separa as alterações em commits lógicos (um por unidade) com `bash scripts/commit.sh "tipo(scope): mensagem" caminhos...`. Se falhar, não commits código partido — corrige ou regista em `BUGS.md`. Contexto extra: $ARGUMENTS
+Run `bash scripts/check.sh` first. If it passes, split the changes into logical commits (one per unit) with `bash scripts/commit.sh "type(scope): message" paths...`. If it fails, don't commit broken code — fix it or register it in `BUGS.md`. Extra context: $ARGUMENTS

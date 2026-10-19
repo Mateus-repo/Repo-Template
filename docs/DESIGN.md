@@ -1,64 +1,64 @@
 # Design — {{PROJECT_NAME}}
 
-> Fonte de verdade da interface (web, desktop, mobile ou jogo). Skill: `ui-design`.
-> Se o projeto não tem UI, apaga este ficheiro.
+> Source of truth for the interface (web, desktop, mobile or game). Skill: `ui-design`.
+> If the project has no UI, delete this file.
 
-## Direção
+## Direction
 
-- **Tom/personalidade:** _ex.: acolhedor, minimalista, "cozy"_
-- **Plataforma e tamanhos-alvo:** _ex.: desktop 1280×720+, mobile 360×640+_
-- **Referências visuais:** _a preencher_
+- **Tone/personality:** _e.g.: welcoming, minimalist, "cozy"_
+- **Platform and target sizes:** _e.g.: desktop 1280×720+, mobile 360×640+_
+- **Visual references:** _to be filled in_
 
 ## Tokens
 
-### Cor
+### Color
 
-| Token | Valor | Uso |
+| Token | Value | Use |
 |-------|-------|-----|
-| `--color-bg` | `#…` | Fundo base |
-| `--color-surface` | `#…` | Cartões/painéis |
-| `--color-text` | `#…` | Texto principal (contraste ≥ 4.5:1 com `bg`) |
-| `--color-text-muted` | `#…` | Texto secundário |
-| `--color-primary` | `#…` | Ação principal |
-| `--color-danger` / `--color-success` / `--color-warning` | `#…` | Estados |
+| `--color-bg` | `#…` | Base background |
+| `--color-surface` | `#…` | Cards/panels |
+| `--color-text` | `#…` | Main text (contrast ≥ 4.5:1 with `bg`) |
+| `--color-text-muted` | `#…` | Secondary text |
+| `--color-primary` | `#…` | Primary action |
+| `--color-danger` / `--color-success` / `--color-warning` | `#…` | States |
 
-### Tipografia
+### Typography
 
-| Papel | Família | Tamanho/peso/entrelinha |
+| Role | Family | Size/weight/line-height |
 |-------|---------|--------------------------|
-| Título | | |
-| Corpo | | |
-| Legenda | | |
+| Title | | |
+| Body | | |
+| Caption | | |
 
-### Espaçamento (escala de 4/8)
+### Spacing (4/8 scale)
 
 `4 · 8 · 12 · 16 · 24 · 32 · 48 · 64`
 
-### Raios, sombras, bordas
+### Radii, shadows, borders
 
-_a definir_
+_to be defined_
 
-### Movimento
+### Motion
 
-Duração 120–240 ms, *easing* suave; respeitar "reduzir movimento".
+Duration 120–240 ms, smooth *easing*; respect "reduce motion".
 
-## Componentes
+## Components
 
-| Componente | Estados obrigatórios | Notas |
+| Component | Required states | Notes |
 |------------|---------------------|-------|
-| Botão | normal · hover · foco · pressionado · desativado · a carregar | |
-| Campo de texto | normal · foco · erro · desativado | |
-| Lista/tabela | vazio · a carregar · erro · com dados | |
+| Button | normal · hover · focus · pressed · disabled · loading | |
+| Text field | normal · focus · error · disabled | |
+| List/table | empty · loading · error · with data | |
 
-## Princípios de layout
+## Layout principles
 
-_Hierarquia, grelha, alinhamento, densidade._
+_Hierarchy, grid, alignment, density._
 
-## Acessibilidade
+## Accessibility
 
-- Contraste ≥ 4.5:1 (texto) / 3:1 (UI) · alvos de toque ≥ 44 px · navegação por teclado/gamepad · foco visível · não depender só da cor.
+- Contrast ≥ 4.5:1 (text) / 3:1 (UI) · touch targets ≥ 44 px · keyboard/gamepad navigation · visible focus · don't rely on color alone.
 
-## Registo de alterações de design
+## Design change log
 
-| Data | Alteração | Motivo |
+| Date | Change | Reason |
 |------|-----------|--------|

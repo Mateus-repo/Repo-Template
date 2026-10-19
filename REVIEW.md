@@ -1,36 +1,36 @@
 # REVIEW — {{PROJECT_NAME}}
 
-> Auto-revisões do agente (e revisões do utilizador). Corre `/review` antes de fechar um milestone, antes de commits grandes e depois de blocos longos de trabalho autónomo.
-> Skill: `code-review`. Para uma segunda opinião independente usa o subagente `@reviewer`; para atacar um plano usa `@critic`.
+> The agent's self-reviews (and the user's reviews). Run `/review` before closing a milestone, before big commits and after long blocks of autonomous work.
+> Skill: `code-review`. For a second independent opinion use the `@reviewer` subagent; to attack a plan use `@critic`.
 
-## Checklist rápida (por revisão)
+## Quick checklist (per review)
 
-- [ ] **Correção:** faz o que o critério de aceitação pede? Casos-limite e erros tratados?
-- [ ] **Testes:** cobrem o comportamento novo e os bugs corrigidos? Passam de forma determinística?
-- [ ] **Design:** responsabilidades claras, módulos pequenos, acoplamento baixo, sem duplicação evidente?
-- [ ] **Legibilidade:** nomes, estrutura, comentários só onde explicam o *porquê*?
-- [ ] **Segurança:** input validado, segredos fora do repo, dependências justificadas? (`security-review`)
-- [ ] **Performance:** nada claramente quadrático/bloqueante em caminhos quentes?
-- [ ] **UI/UX** (se aplicável): estados (vazio/carregar/erro), contraste, foco, responsividade? (`ui-design`)
-- [ ] **Docs:** README/ARCHITECTURE/CHANGELOG/CONVENTIONS refletem a realidade?
-- [ ] **Git:** commits pequenos, mensagens claras, sem ficheiros que não pertencem?
+- [ ] **Correctness:** does it do what the acceptance criteria ask for? Edge cases and errors handled?
+- [ ] **Tests:** cover the new behaviour and the fixed bugs? Pass deterministically?
+- [ ] **Design:** clear responsibilities, small modules, low coupling, no obvious duplication?
+- [ ] **Readability:** names, structure, comments only where they explain the *why*?
+- [ ] **Security:** input validated, secrets out of the repository, dependencies justified? (`security-review`)
+- [ ] **Performance:** nothing clearly quadratic/blocking on hot paths?
+- [ ] **UI/UX** (if applicable): states (empty/loading/error), contrast, focus, responsiveness? (`ui-design`)
+- [ ] **Docs:** do README/ARCHITECTURE/CHANGELOG/CONVENTIONS reflect reality?
+- [ ] **Git:** small commits, clear messages, no files that don't belong?
 
-## Severidade dos achados
+## Severity of findings
 
-`blocker` (não fechar sem corrigir) · `major` · `minor` · `nit` · `idea` (vai para IDEAS.md)
+`blocker` (do not close without fixing) · `major` · `minor` · `nit` · `idea` (goes to IDEAS.md)
 
-## Revisões
+## Reviews
 
-### Modelo
+### Template
 
 ```
-### R-NNN — Âmbito (AAAA-MM-DD) — Resultado: ✅ ok / ⚠️ com ressalvas / ❌ não passa
-- **Âmbito:** commits/ficheiros revistos.
-- **Achados:**
-  | # | Severidade | Onde | Problema | Ação | Estado |
+### R-NNN — Scope (YYYY-MM-DD) — Result: ✅ ok / ⚠️ with caveats / ❌ fails
+- **Scope:** commits/files reviewed.
+- **Findings:**
+  | # | Severity | Where | Problem | Action | Status |
   |---|------------|------|----------|------|--------|
-- **O que está bem:** …
-- **Riscos residuais:** …
+- **What works well:** …
+- **Residual risks:** …
 ```
 
-_Nenhuma revisão ainda._
+_No reviews yet._

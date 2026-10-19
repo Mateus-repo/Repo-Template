@@ -1,26 +1,26 @@
 # TODO — {{PROJECT_NAME}}
 
-> Fila de trabalho do agente. Ordem = prioridade. Uma tarefa = algo que cabe numa sessão curta e tem **critério de aceitação verificável**.
-> Formato: `- [ ] T-NNN [P0–P3] [tamanho S/M/L] Título — aceitação: …  (ref: ROADMAP M#, BUGS B-NNN)`
-> P0 = bloqueia tudo · P1 = milestone atual · P2 = importante · P3 = quando houver tempo.
-> Tarefas L (> ~2h) devem ser decompostas antes de começar (skill `planning`).
+> The agent's task queue. Order = priority. A task = something that fits in a short session and has **verifiable acceptance criteria**.
+> Format: `- [ ] T-NNN [P0–P3] [size S/M/L] Title — acceptance: …  (ref: ROADMAP M#, BUGS B-NNN)`
+> P0 = blocks everything · P1 = current milestone · P2 = important · P3 = when there is time.
+> L tasks (> ~2h) must be broken down before starting (skill `planning`).
 
-## Agora
+## Now
 
-- [ ] T-001 [P1] [S] Executar `/bootstrap` — aceitação: comandos reais em `AGENTS.md`, `scripts/check.sh` corre, `ARCHITECTURE.md` preenchido
+- [ ] T-001 [P1] [S] Run `/bootstrap` — acceptance: real commands in `AGENTS.md`, `scripts/check.sh` runs, `ARCHITECTURE.md` filled in
 
-## A seguir
+## Next
 
-_vazio_
+_empty_
 
-## Mais tarde
+## Later
 
-_vazio_
+_empty_
 
-## Bloqueadas (esperam resposta do utilizador — ver QUESTIONS.md)
+## Blocked (waiting for the user's answer — see QUESTIONS.md)
 
-_vazio_
+_empty_
 
-## Feitas (últimas 20; o resto vai para PROGRESS.md › Arquivo)
+## Done (last 20; the rest goes to PROGRESS.md › Archive)
 
-_vazio_
+_empty_

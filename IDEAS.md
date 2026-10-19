@@ -1,28 +1,28 @@
 # IDEAS — {{PROJECT_NAME}}
 
-> Caixa de entrada de ideias. **Regra de ouro: uma ideia não é uma tarefa.** Captura em 1–2 linhas e segue com o trabalho.
-> Triagem (agente, quando a fila de `TODO.md` acaba — ou o utilizador, a qualquer momento):
-> `Promover` → `TODO.md`/`ROADMAP.md` · `Adiar` · `Rejeitar` (com motivo — evita rediscutir).
-> Critério para promover: serve a **visão/milestone** do `ROADMAP.md`? Valor alto / esforço baixo? Não duplica nada?
+> Ideas inbox. **Golden rule: an idea is not a task.** Capture it in 1–2 lines and get on with the work.
+> Triage (agent, when the `TODO.md` queue runs out — or the user, at any time):
+> `Promote` → `TODO.md`/`ROADMAP.md` · `Defer` · `Reject` (with a reason — avoids discussing it again).
+> Criteria for promoting: does it serve the `ROADMAP.md` **vision/milestone**? High value / low effort? Doesn't duplicate anything?
 
-## Caixa de entrada
+## Inbox
 
-<!-- - (AAAA-MM-DD) [origem: agente/utilizador] Ideia em uma linha — porquê pode valer a pena -->
+<!-- - (YYYY-MM-DD) [origin: agent/user] One-line idea — why it might be worth it -->
 
-_Vazia._
+_Empty.
 
-## Em avaliação
+## Under evaluation
 
-_Vazia._
+_Empty.
 
-## Promovidas
+## Promoted
 
-_Vazia._
+_Empty.
 
-## Adiadas
+## Deferred
 
-_Vazia._
+_Empty.
 
-## Rejeitadas (com motivo)
+## Rejected (with reason)
 
-_Vazia._
+_Empty.

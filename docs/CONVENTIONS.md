@@ -1,56 +1,56 @@
-# Convenções — {{PROJECT_NAME}}
+# Conventions — {{PROJECT_NAME}}
 
-> Carregado automaticamente em cada sessão (via `opencode.json › instructions`). **Mantém curto e prático.**
-> Precedência: o que o código existente já faz > este documento > preferências gerais do agente.
+> Loaded automatically in every session (via `opencode.json › instructions`). **Keep it short and practical.**
+> Precedence: what existing code already does > this document > the agent's general preferences.
 
-## Estrutura
+## Structure
 
-- Código em `src/`, testes em `tests/` (ou junto do código, conforme a stack) — _confirmar com `/bootstrap`_.
-- Um módulo = uma responsabilidade. Ficheiros < ~300 linhas, funções < ~40 linhas (referências, não dogmas).
+- Code in `src/`, tests in `tests/` (or alongside the code, depending on the stack) — _confirm with `/bootstrap`_.
+- One module = one responsibility. Files < ~300 lines, functions < ~40 lines (guidelines, not dogma).
 
-## Reutilização e módulos
+## Reuse and modules
 
-- **Procura antes de escrever:** `docs/MODULES.md` + `bash scripts/find-reuse.sh <termos>`.
-- Funções puras, entradas/saídas explícitas, sem globais; I/O e estado nas bordas; dependências por parâmetro.
-- Regra do 1-2-3: 1 consumidor → privado na feature · 2.º consumidor → `shared/<conceito>/` · 3.º caso → generalizar.
-- Cada módulo: ponto de entrada único (API pública mínima), `README.md`, testes sobre a API pública. Importar sempre pelo ponto de entrada.
-- Sem `utils`/`helpers` genéricos: agrupar por conceito.
+- **Search before writing:** `docs/MODULES.md` + `bash scripts/find-reuse.sh <terms>`.
+- Pure functions, explicit inputs/outputs, no globals; I/O and state at the edges; dependencies as parameters.
+- 1-2-3 rule: 1st consumer → private to the feature · 2nd consumer → `shared/<concept>/` · 3rd case → generalize.
+- Each module: single entry point (minimal public API), `README.md`, tests on the public API. Always import through the entry point.
+- No generic `utils`/`helpers`: group by concept.
 
-## Nomes
+## Naming
 
-- Ficheiros/pastas: _ex.: `kebab-case`_ · Tipos/classes: `PascalCase` · funções/variáveis: _ex.: `camelCase`_ · constantes: `UPPER_SNAKE_CASE`.
-- Nomes dizem **o quê**, não **como**. Evita abreviaturas obscuras. Booleanos: `isX`, `hasX`, `canX`.
+- Files/folders: _e.g.: `kebab-case`_ · Types/classes: `PascalCase` · functions/variables: _e.g.: `camelCase`_ · constants: `UPPER_SNAKE_CASE`.
+- Names say **what**, not **how**. Avoid obscure abbreviations. Booleans: `isX`, `hasX`, `canX`.
 
-## Estilo
+## Style
 
-- Formatação automática (formatter da stack) — nunca discutir estilo à mão.
-- Comentários explicam o **porquê**; o código explica o **como**.
-- Sem código morto nem *feature flags* esquecidas.
+- Automatic formatting (the stack's formatter) — never debate style by hand.
+- Comments explain **why**; code explains **how**.
+- No dead code or forgotten *feature flags*.
 
-## Documentação
+## Documentation
 
-- Docstring em **tudo** o que é exportado: o quê, parâmetros, retorno, erros, efeitos, exemplo (formato idiomático da stack).
-- `README.md` em cada módulo (modelo: `docs/templates/MODULE_README.md`); linha em `docs/MODULES.md` para o que é reutilizável.
-- Língua: _identificadores em inglês; docstrings/README em PT-PT_ (ajustar ao projeto).
-- Código e docs mudam no mesmo commit.
+- Docstrings on **everything** exported: what, parameters, return, errors, side effects, example (the stack's idiomatic format).
+- `README.md` in each module (template: `docs/templates/MODULE_README.md`); a line in `docs/MODULES.md` for whatever is reusable.
+- Language: _identifiers in English; docstrings/README in English_ (adjust to the project).
+- Code and docs change in the same commit.
 
-## Erros e logging
+## Errors and logging
 
-- Erros tratados nas fronteiras; mensagens acionáveis; nunca engolir exceções em silêncio.
-- Logs com nível (`debug/info/warn/error`); nunca registar segredos ou dados pessoais.
+- Errors handled at the boundaries; actionable messages; never swallow exceptions silently.
+- Logs with levels (`debug/info/warn/error`); never log secrets or personal data.
 
-## Dependências
+## Dependencies
 
-- Preferir biblioteca padrão. Nova dependência: justificar em `DECISIONS.md` (manutenção, tamanho, licença).
+- Prefer the standard library. New dependency: justify it in `DECISIONS.md` (maintenance, size, license).
 
 ## Git
 
-- Conventional Commits (em inglês). Branches: `feat/…`, `fix/…`, `chore/…` (trabalho longo pode ficar em `ai/<tema>`).
+- Conventional Commits (in English). Branches: `feat/…`, `fix/…`, `chore/…` (long-running work can live in `ai/<topic>`).
 
-## Específico da stack ({{STACK}})
+## Stack-specific ({{STACK}})
 
-_A preencher com `/bootstrap`: formatter, linter, gestor de pacotes, estrutura típica._
+_To be filled in with `/bootstrap`: formatter, linter, package manager, typical structure._
 
-## Comandos
+## Commands
 
-Ver tabela em `AGENTS.md` §1.
+See the table in `AGENTS.md` §1.

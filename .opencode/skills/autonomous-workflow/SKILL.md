@@ -1,75 +1,75 @@
 ---
 name: autonomous-workflow
-description: Como trabalhar de forma autónoma durante sessões longas (~2 horas ou mais) sem interromper o utilizador. Usa SEMPRE que o utilizador pedir trabalho longo/autónomo, usar /autopilot, disser "continua", "trabalha sozinho", "faz o que for preciso", ou quando tiveres uma fila de tarefas por cumprir. Cobre o loop de trabalho, gestão do tempo, checkpoints, o que fazer quando a fila acaba, como sobreviver a compressão de contexto e quando (e só quando) parar.
+description: How to work autonomously during long sessions (~2 hours or more) without interrupting the user. ALWAYS use when the user asks for long/autonomous work, uses /autopilot, says "continue", "work on your own", "do whatever it takes", or when you have a task queue to work through. Covers the work loop, time management, checkpoints, what to do when the queue runs out, how to survive context compression and when (and only when) to stop.
 ---
 
 # Autonomous workflow
 
-**Meta:** entregar o máximo de trabalho verificado, em sessões de ~2h, **sem** pedir input ao utilizador a não ser em bloqueios reais.
+**Goal:** deliver the most verified work possible, in ~2h sessions, **without** asking the user for input except on real blockers.
 
-## Mentalidade
+## Mindset
 
-- Tu és o responsável pela decisão. O utilizador delegou para não ser interrompido.
-- Um palpite razoável, registado e reversível vale mais que uma pergunta que bloqueia horas.
-- Mas autonomia ≠ imprudência: verifica tudo, protege dados, não saias do âmbito.
+- You are the one responsible for the decision. The user delegated so they wouldn't be interrupted.
+- A reasonable hunch, recorded and reversible, is worth more than a question that blocks for hours.
+- But autonomy ≠ recklessness: verify everything, protect data, don't step outside scope.
 
-## Setup (1 minuto)
+## Setup (1 minute)
 
-1. `bash scripts/session-start.sh` → contexto + relógio.
-2. Ler `PROGRESS.md`, `QUESTIONS.md`, `TODO.md`, `ROADMAP.md`, `BUGS.md`.
-3. Confirma o orçamento: `bash scripts/clock.sh` (omissão 120 min).
-4. Define a **meta da sessão** em 1–3 linhas (ex.: "fechar M1: T-004..T-009") e escreve-a no topo da entrada de hoje em `PROGRESS.md`.
+1. `bash scripts/session-start.sh` → context + clock.
+2. Read `PROGRESS.md`, `QUESTIONS.md`, `TODO.md`, `ROADMAP.md`, `BUGS.md`.
+3. Confirm the budget: `bash scripts/clock.sh` (default 120 min).
+4. Define the **session goal** in 1–3 lines (e.g. "close M1: T-004..T-009") and write it at the top of today's entry in `PROGRESS.md`.
 
 ## Loop
 
 ```
-repetir:
-  tarefa = topo de TODO › Agora   (senão: ROADMAP; senão: §"Quando a fila acaba")
-  se tarefa é L ou vaga → decompor (skill planning)
-  implementar em passos pequenos
-  verificar (scripts/check.sh + critério de aceitação)  → skill testing-verification
-  registar (TODO, PROGRESS, DECISIONS/BUGS/CHANGELOG)    → skill project-docs
-  commit                                                 → skill auto-commit
-  a cada ~25 min: checkpoint (PROGRESS › Estado atual) + bash scripts/clock.sh
-  se restam < 10 min → começar handoff
+repeat:
+  task = top of TODO › Now   (else: ROADMAP; else: §"When the queue runs out")
+  if task is L or vague → break it down (skill planning)
+  implement in small steps
+  verify (scripts/check.sh + acceptance criteria)  → skill testing-verification
+  record (TODO, PROGRESS, DECISIONS/BUGS/CHANGELOG)    → skill project-docs
+  commit                                               → skill auto-commit
+  every ~25 min: checkpoint (PROGRESS › Current state) + bash scripts/clock.sh
+  if < 10 min remain → start the handoff
 ```
 
-Não escrevas mensagens para o utilizador entre tarefas. Escreve ficheiros.
+Don't write messages to the user between tasks. Write files.
 
-## Quando surge uma dúvida
+## When a doubt comes up
 
-1. Primeiro tenta resolver **lendo** (código, docs, git log, DECISIONS).
-2. Depois skill `decide-without-asking` (5 ângulos) → decide e regista.
-3. Só se for **bloqueio real** → `QUESTIONS.md` (com recomendação por defeito) e **passa a outra tarefa**.
+1. First try to resolve it **by reading** (code, docs, git log, DECISIONS).
+2. Then skill `decide-without-asking` (5 angles) → decide and record.
+3. Only if it's a **real blocker** → `QUESTIONS.md` (with a default recommendation) and **move on to another task**.
 
-Bloqueio real = credenciais/acessos que não tens · ação destrutiva/irreversível ou com custo · ambiguidade de produto que muda muito o resultado · contradiz instrução explícita · sai do âmbito do repo.
+Real blocker = credentials/access you don't have · destructive/irreversible action or one with a cost · product ambiguity that changes the outcome a lot · contradicts an explicit instruction · goes outside the repo's scope.
 
-## Quando uma tarefa falha ou encravas
+## When a task fails or gets stuck
 
-- 2 tentativas falhadas na mesma abordagem → pára, muda de estratégia (skill `debugging`: hipóteses alternativas).
-- 30+ min numa só tarefa sem progresso mensurável → regista em `BUGS.md`/`QUESTIONS.md`, marca a tarefa como bloqueada, **avança** para outra.
-- Nunca deixes o repo partido ao mudar de tarefa: ou funciona, ou está num commit/branch isolado, ou foi revertido.
+- 2 failed attempts on the same approach → stop, change strategy (skill `debugging`: alternative hypotheses).
+- 30+ min on a single task with no measurable progress → record it in `BUGS.md`/`QUESTIONS.md`, mark the task as blocked, **move on** to another one.
+- Never leave the repo broken when switching tasks: it either works, or it's on an isolated commit/branch, or it was reverted.
 
-## Quando a fila acaba
+## When the queue runs out
 
-Sem inventar âmbito, por ordem: (1) lacunas de testes · (2) `/review` ao trabalho recente e corrigir blockers · (3) refactor de smells já conhecidos · (4) sincronizar docs ↔ código · (5) triagem de `IDEAS.md` (promover só o que serve o ROADMAP). Se nada disto fizer sentido → termina.
+Without inventing scope, in order: (1) test gaps · (2) `/review` the recent work and fix blockers · (3) refactor already-known smells · (4) sync docs ↔ code · (5) triage `IDEAS.md` (promote only what serves the ROADMAP). If none of this makes sense → stop.
 
-## Sobreviver à compressão de contexto
+## Surviving context compression
 
-O contexto pode ser resumido a meio. Defesas:
-- `PROGRESS.md › Estado atual` sempre verdadeiro (o que estou a fazer, o que falta, estado dos testes).
-- Cada tarefa tem critério de aceitação **escrito** em `TODO.md`.
-- Decisões em `DECISIONS.md`, não só na cabeça.
-- Depois de uma compressão: repete o ritual de arranque (não confies no resumo).
+The context may be summarized halfway through. Defenses:
+- `PROGRESS.md › Current state` always true (what I'm doing, what's left, test status).
+- Each task has acceptance criteria **written** in `TODO.md`.
+- Decisions in `DECISIONS.md`, not just in your head.
+- After a compression: repeat the startup ritual (don't trust the summary).
 
-## Parar (só nestes casos)
+## Stop (only in these cases)
 
-- Orçamento de tempo esgotado → handoff (skill `session-handoff`).
-- Fila vazia e nada útil a fazer → `bash scripts/autopilot.sh stop "concluído"`.
-- **Tudo** o que resta está bloqueado → regista em `QUESTIONS.md`, `bash scripts/autopilot.sh stop "bloqueado: <resumo>"`.
-- O utilizador interrompeu ou pediu para parar.
+- Time budget exhausted → handoff (skill `session-handoff`).
+- Empty queue and nothing useful to do → `bash scripts/autopilot.sh stop "done"`.
+- **Everything** that's left is blocked → record it in `QUESTIONS.md`, `bash scripts/autopilot.sh stop "blocked: <summary>"`.
+- The user interrupted or asked you to stop.
 
-## Resumo final (≤ 10 linhas)
+## Final summary (≤ 10 lines)
 
-Feito (IDs) · Decisões tuas (D-NNN) · Bloqueado/perguntas (Q-NNN) · Estado (build/testes/branch) · Próximo passo.
-Se algo **não funcionou**, di-lo e inclui o diagnóstico (erro, comando, o que já excluíste).
+Done (IDs) · Your decisions (D-NNN) · Blocked/questions (Q-NNN) · State (build/tests/branch) · Next step.
+If something **didn't work**, say so and include the diagnosis (error, command, what you've already ruled out).

@@ -1,35 +1,35 @@
 # PROGRESS — {{PROJECT_NAME}}
 
-> **Memória de trabalho do projeto.** Lê-se no arranque de cada sessão e depois de cada compressão de contexto.
-> Mantém *Estado atual* curto e verdadeiro (≤ 30 linhas). O diário vai por baixo, mais recente primeiro.
+> **The project's working memory.** Read at the start of each session and after each context compression.
+> Keep *Current state* short and truthful (≤ 30 lines). The session log goes below, most recent first.
 
-## Estado atual
+## Current state
 
-- **Milestone atual:** M0 — Fundações
-- **Última atualização:** {{DATE}}
-- **Saúde do build/testes:** ❓ por verificar
-- **Em curso:** nada
-- **Próximo passo recomendado:** executar `/bootstrap`
-- **Bloqueios / perguntas abertas:** nenhum
-- **Riscos / dívida técnica relevante:** nenhum registado
+- **Current milestone:** M0 — Foundations
+- **Last update:** {{DATE}}
+- **Build/test health:** ❓ to be verified
+- **In progress:** nothing
+- **Recommended next step:** run `/bootstrap`
+- **Blockers / open questions:** none
+- **Risks / relevant technical debt:** none recorded
 
-## Diário de sessões
+## Session log
 
-<!-- Modelo de entrada (copiar para cima):
+<!-- Entry template (copy upwards):
 
-### AAAA-MM-DD HH:MM — título curto  (duração: Xh Ym)
-- **Feito:** T-00X …; T-00Y …
-- **Decisões:** D-00X (link em DECISIONS.md)
-- **Descobertas / problemas:** …
-- **Estado ao sair:** build ✅/❌ · testes ✅/❌ · branch · último commit
-- **Próximo passo:** …
+### YYYY-MM-DD HH:MM — short title  (duration: Xh Ym)
+- **Done:** T-00X …; T-00Y …
+- **Decisions:** D-00X (link in DECISIONS.md)
+- **Findings / problems:** …
+- **State on exit:** build ✅/❌ · tests ✅/❌ · branch · last commit
+- **Next step:** …
 -->
 
-### {{DATE}} — Criação do projeto a partir do template
-- **Feito:** estrutura base, documentos de gestão, skills e plugins do OpenCode.
-- **Estado ao sair:** nada para compilar ainda.
-- **Próximo passo:** `/bootstrap`.
+### {{DATE}} — Project created from the template
+- **Done:** base structure, management documents, OpenCode skills and plugins.
+- **State on exit:** nothing to compile yet.
+- **Next step:** `/bootstrap`.
 
-## Arquivo
+## Archive
 
-_Entradas antigas (> 20 sessões) resumidas aqui._
+_Old entries (> 20 sessions) summarised here._

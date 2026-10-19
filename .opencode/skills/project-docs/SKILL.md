@@ -1,83 +1,83 @@
 ---
 name: project-docs
-description: Como ler, escrever e manter os ficheiros .md de gestão do projeto (README, ROADMAP, TODO, PROGRESS, DECISIONS, QUESTIONS, BUGS, REVIEW, IDEAS, ARCHITECTURE, CHANGELOG, docs/*). Usa SEMPRE que fores criar, atualizar ou consultar qualquer um destes documentos, registar uma decisão, bug, ideia, pergunta ou progresso, ou quando não souberes onde guardar uma informação. Usa também no fim de cada tarefa para saber exatamente o que atualizar.
+description: How to read, write and maintain the project's management .md files (README, ROADMAP, TODO, PROGRESS, DECISIONS, QUESTIONS, BUGS, REVIEW, IDEAS, ARCHITECTURE, CHANGELOG, docs/*). ALWAYS use whenever you are about to create, update or consult any of these documents, record a decision, bug, idea, question or progress, or when you don't know where to store information. Also use at the end of every task to know exactly what to update.
 ---
 
-# Project docs — onde vai cada coisa e como escrever
+# Project docs — where each thing goes and how to write it
 
-Os `.md` são a **memória do projeto**: sobrevivem a compressão de contexto e a novas sessões. Código e docs mudam **no mesmo commit**.
+The `.md` files are the **project's memory**: they survive context compression and new sessions. Code and docs change **in the same commit**.
 
-## 1. Onde guardo isto?
+## 1. Where do I put this?
 
-| Tenho… | Vai para | Formato |
+| I have… | Goes to | Format |
 |--------|----------|---------|
-| Uma tarefa concreta a fazer | `TODO.md` | `- [ ] T-NNN [P?] [S/M/L] Título — aceitação: …` |
-| Algo que comecei/acabei | `TODO.md` (marcar) + `PROGRESS.md` | entrada do diário |
-| Uma escolha entre alternativas | `DECISIONS.md` | `D-NNN` (ver modelo no ficheiro) |
-| Um bug | `BUGS.md` | `B-NNN [P?]` |
-| Uma dúvida que só o utilizador resolve | `QUESTIONS.md` | `Q-NNN` com recomendação por defeito |
-| "Seria fixe se…" | `IDEAS.md` › Caixa de entrada | 1–2 linhas, com data |
-| Achado de revisão | `REVIEW.md` | `R-NNN` + tabela de achados |
-| Mudança de direção/milestone | `ROADMAP.md` (propor; utilizador confirma) | tabela de milestones |
-| Mudança visível para quem usa | `CHANGELOG.md` › Por lançar | Adicionado/Alterado/Corrigido |
-| Mudança de estrutura/módulos | `ARCHITECTURE.md` | tabela de módulos |
-| Termo do domínio | `docs/GLOSSARY.md` | tabela |
-| Convenção de código nova | `docs/CONVENTIONS.md` | regra curta + exemplo |
-| Decisão visual / token de design | `docs/DESIGN.md` | tokens/componentes |
+| A concrete task to do | `TODO.md` | `- [ ] T-NNN [P?] [S/M/L] Title — acceptance: …` |
+| Something I started/finished | `TODO.md` (check it) + `PROGRESS.md` | diary entry |
+| A choice between alternatives | `DECISIONS.md` | `D-NNN` (see template in the file) |
+| A bug | `BUGS.md` | `B-NNN [P?]` |
+| A doubt only the user can resolve | `QUESTIONS.md` | `Q-NNN` with default recommendation |
+| "It would be nice if…" | `IDEAS.md` › Inbox | 1–2 lines, with date |
+| Review finding | `REVIEW.md` | `R-NNN` + findings table |
+| Change of direction/milestone | `ROADMAP.md` (propose; user confirms) | milestones table |
+| Change visible to users | `CHANGELOG.md` › Unreleased | Added/Changed/Fixed |
+| Structure/module change | `ARCHITECTURE.md` | modules table |
+| Domain term | `docs/GLOSSARY.md` | table |
+| New code convention | `docs/CONVENTIONS.md` | short rule + example |
+| Visual decision / design token | `docs/DESIGN.md` | tokens/components |
 
-Se a informação serve para **decidir o que fazer a seguir** → `TODO`/`ROADMAP`. Se serve para **entender o que aconteceu** → `PROGRESS`/`DECISIONS`. Se serve para **não esquecer uma ideia** → `IDEAS`.
+If the information helps **decide what to do next** → `TODO`/`ROADMAP`. If it helps **understand what happened** → `PROGRESS`/`DECISIONS`. If it helps **not forget an idea** → `IDEAS`.
 
-## 2. Regras de escrita
+## 2. Writing rules
 
-- **Factos verificáveis, sem floreados.** "Testes: 42 ✅ / 1 ❌ (`test_parse_empty`)" > "quase tudo a funcionar".
-- **IDs estáveis** (`T-001`, `D-001`, `B-001`, `Q-001`, `R-001`, `M1`). Incrementa o maior existente; nunca reutilizes.
-- **Datas ISO** `AAAA-MM-DD`. Obtém a data real com `date`, não adivinhes.
-- **Mais recente primeiro** em diários e listas de histórico.
-- **Referências cruzadas:** `T-012` ← `B-003`; `D-004` em `ARCHITECTURE.md`; commit com hash curto.
-- **Curto:** `Estado atual` ≤ 30 linhas. Passou das ~400 linhas → arquiva.
-- **Honestidade:** se algo falhou ou foi assumido, escreve-o. `DECISIONS.md` distingue `Aceite` de `Provisória`.
-- **Sem placeholders esquecidos** (`{{...}}`, `TODO` soltos) em ficheiros já preenchíveis.
-- Docs e código discordam → **o código manda**; corrige o doc.
+- **Verifiable facts, no flourishes.** "Tests: 42 ✅ / 1 ❌ (`test_parse_empty`)" > "almost everything working".
+- **Stable IDs** (`T-001`, `D-001`, `B-001`, `Q-001`, `R-001`, `M1`). Increment the largest existing one; never reuse.
+- **ISO dates** `YYYY-MM-DD`. Get the real date with `date`, don't guess.
+- **Newest first** in diaries and history lists.
+- **Cross-references:** `T-012` ← `B-003`; `D-004` in `ARCHITECTURE.md`; commit with short hash.
+- **Short:** `Current state` ≤ 30 lines. Past ~400 lines → archive it.
+- **Honesty:** if something failed or was assumed, write it. `DECISIONS.md` distinguishes `Accepted` from `Provisional`.
+- **No forgotten placeholders** (`{{...}}`, stray `TODO`) in files ready to fill in.
+- Docs and code disagree → **the code wins**; fix the doc.
 
-## 3. Rotinas
+## 3. Routines
 
-### Ao terminar uma tarefa
-1. `TODO.md`: marca `[x]`, move para *Feitas*, adiciona tarefas derivadas.
-2. `PROGRESS.md`: atualiza *Estado atual*; entrada no diário se foi relevante.
-3. Se tomaste uma decisão não-trivial → `DECISIONS.md`.
-4. Se encontraste/corrigiste um bug → `BUGS.md`.
-5. Se há mudança visível → `CHANGELOG.md`. Se mudou estrutura → `ARCHITECTURE.md`.
-6. Se te ocorreram ideias → `IDEAS.md` (e **não** as implementes).
+### When finishing a task
+1. `TODO.md`: check `[x]`, move to *Done*, add derived tasks.
+2. `PROGRESS.md`: update *Current state*; diary entry if it was relevant.
+3. If you made a non-trivial decision → `DECISIONS.md`.
+4. If you found/fixed a bug → `BUGS.md`.
+5. If there's a visible change → `CHANGELOG.md`. If the structure changed → `ARCHITECTURE.md`.
+6. If ideas occurred to you → `IDEAS.md` (and **don't** implement them).
 7. Commit.
 
-### Ao iniciar sessão
-Ver skill `session-handoff` (Arranque).
+### On session start
+See skill `session-handoff` (Startup).
 
-### Quando o utilizador responde a uma pergunta
-Move `Q-NNN` para *Respondidas* com a resposta e a data; aplica; se alterou algo relevante, `DECISIONS.md`; desbloqueia as tarefas em `TODO.md › Bloqueadas`.
+### When the user answers a question
+Move `Q-NNN` to *Answered* with the answer and the date; apply it; if it changed something relevant, `DECISIONS.md`; unblock the tasks in `TODO.md › Blocked`.
 
-### Triagem de ideias (quando a fila acaba)
-Para cada ideia: serve o `ROADMAP`? valor/esforço? duplicada? → **Promover** (cria `T-NNN`), **Adiar** ou **Rejeitar** (com motivo, para não rediscutir).
+### Idea triage (when the queue runs out)
+For each idea: does it serve the `ROADMAP`? value/effort? duplicated? → **Promote** (create `T-NNN`), **Defer** or **Reject** (with a reason, so it isn't re-discussed).
 
-## 4. Modelos rápidos
+## 4. Quick templates
 
 ```
-- [ ] T-014 [P1] [M] Validar input do formulário — aceitação: campos inválidos mostram erro; 5 casos-limite testados  (ref: M1)
+- [ ] T-014 [P1] [M] Validate form input — acceptance: invalid fields show an error; 5 edge cases tested  (ref: M1)
 ```
 ```
-### 2026-03-02 14:10 — Parser de configuração  (duração: 1h 20m)
-- Feito: T-011, T-012
-- Decisões: D-006 (formato TOML)
-- Descobertas: B-004 (crash com ficheiro vazio) corrigido
-- Estado ao sair: build ✅ · testes ✅ (57) · branch main · a1b2c3d
-- Próximo passo: T-013 mensagens de erro
+### 2026-03-02 14:10 — Configuration parser  (duration: 1h 20m)
+- Done: T-011, T-012
+- Decisions: D-006 (TOML format)
+- Findings: B-004 (crash with empty file) fixed
+- State on exit: build ✅ · tests ✅ (57) · branch main · a1b2c3d
+- Next step: T-013 error messages
 ```
 ```
-### D-006 — Formato de configuração: TOML  (2026-03-02) — Provisória
-- Contexto: precisamos de config legível por humanos, com comentários.
-- Opções: A) JSON B) YAML C) TOML
-- Análise: precedente (nenhum) · intenção (utilizador edita à mão) · evidência (TOML tem parser padrão na stack) · risco (baixo, fácil converter) · simplicidade (TOML)
-- Decisão: C
-- Pressupostos: utilizador não precisa de aninhamento profundo
-- Como reverter: converter com script (~1h)
+### D-006 — Configuration format: TOML  (2026-03-02) — Provisional
+- Context: we need human-readable config, with comments.
+- Options: A) JSON B) YAML C) TOML
+- Analysis: precedent (none) · intent (user edits by hand) · evidence (TOML has a standard parser in the stack) · risk (low, easy to convert) · simplicity (TOML)
+- Decision: C
+- Assumptions: user doesn't need deep nesting
+- How to revert: convert with a script (~1h)
 ```

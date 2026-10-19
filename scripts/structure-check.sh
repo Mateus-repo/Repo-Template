@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Auditoria de estrutura, documentação e modularidade.
-# Só dá AVISOS (exit 0) por defeito. Com --strict (ou STRICT_STRUCTURE=1) falha se houver avisos.
-# Uso: bash scripts/structure-check.sh [--strict]
-# Variáveis: MAX_FILE_LINES (omissão 300)
+# Audit of structure, documentation and modularity.
+# Only WARNINGS (exit 0) by default. With --strict (or STRICT_STRUCTURE=1) it fails if there are warnings.
+# Usage: bash scripts/structure-check.sh [--strict]
+# Variables: MAX_FILE_LINES (default 300)
 cd "$(dirname "${BASH_SOURCE[0]}")/.." || exit 1
 
 STRICT=0
@@ -12,7 +12,7 @@ CODE_EXT='(js|jsx|mjs|cjs|ts|tsx|py|rs|go|java|kt|cs|c|cc|cpp|h|hpp|rb|php|swift
 warns=0
 warn() { warns=$((warns+1)); echo "  ⚠ $*"; }
 
-# lista de ficheiros do projeto (respeita .gitignore quando há git)
+# project file list (respects .gitignore when there is git)
 if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   raw="$(git ls-files -co --exclude-standard)"
 else
@@ -25,49 +25,49 @@ while IFS= read -r f; do [[ -n "$f" && -f "$f" ]] && files+="$f"$'\n'; done <<<"
 code="$(printf '%s' "$files" | grep -E "\.${CODE_EXT}$" | grep -Ev '(^|/)(node_modules|vendor|dist|build|generated|migrations)/|\.min\.' || true)"
 src_code="$(printf '%s\n' "$code" | grep -E '^(src|app|lib)/' || true)"
 
-echo "▶ Estrutura e documentação"
+echo "▶ Structure and documentation"
 
-# 1. ficheiros de código demasiado grandes
+# 1. code files that are too large
 while IFS= read -r f; do
   [[ -z "$f" ]] && continue
   n=$(wc -l < "$f" | tr -d ' ')
-  (( n > MAX )) && warn "$f tem $n linhas (> $MAX): dividir por responsabilidade (skill refactoring-modular)"
+  (( n > MAX )) && warn "$f has $n lines (> $MAX): split by responsibility (skill refactoring-modular)"
 done <<<"$code"
 
-# 2. módulos (pastas em src/app/lib com ≥ 3 ficheiros de código) sem README.md
+# 2. modules (folders in src/app/lib with >= 3 code files) without README.md
 mods="$(printf '%s\n' "$src_code" | grep -Ev '(^|/)(tests?|__tests__|fixtures)/' \
   | awk -F/ 'NF>2{d=$1; for(i=2;i<NF;i++) d=d"/"$i; c[d]++} END{for(k in c) if(c[k]>=3) print k}' | sort)"
 while IFS= read -r d; do
   [[ -z "$d" ]] && continue
-  [[ -f "$d/README.md" ]] || warn "módulo '$d' sem README.md (modelo: docs/templates/MODULE_README.md)"
+  [[ -f "$d/README.md" ]] || warn "module '$d' has no README.md (template: docs/templates/MODULE_README.md)"
 done <<<"$mods"
 
-# 3. pastas-gaveta e nomes vagos
+# 3. junk-drawer folders and vague names
 vague="$(printf '%s' "$files" | awk -F/ '{for(i=1;i<NF;i++) print $i}' | sort -u \
   | grep -Ei '^(utils?|helpers?|misc|stuff|temp|tmp|new|old|final|copy|backup|test2)$' || true)"
 while IFS= read -r d; do
   [[ -z "$d" ]] && continue
-  warn "pasta '$d': nome vago/gaveta — organizar por conceito (skill project-structure)"
+  warn "folder '$d': vague/junk-drawer name — organise by concept (skill project-structure)"
 done <<<"$vague"
 
-# 4. ficheiros de backup / cópias
+# 4. backup / copy files
 bk="$(printf '%s' "$files" | grep -Ei '(\.(bak|orig|rej|swp)$|~$|(_old|_copy|_backup|-copy)\.[a-z0-9]+$)' || true)"
-while IFS= read -r f; do [[ -n "$f" ]] && warn "ficheiro de backup/cópia: $f (o git guarda o histórico)"; done <<<"$bk"
+while IFS= read -r f; do [[ -n "$f" ]] && warn "backup/copy file: $f (git keeps the history)"; done <<<"$bk"
 
-# 5. placeholders esquecidos nos .md
+# 5. forgotten placeholders in .md files
 while IFS= read -r f; do
   [[ -z "$f" ]] && continue
   case "$f" in .opencode/*|docs/templates/*|TEMPLATE_GUIDE.md|docs/TEMPLATE_GUIDE.md) continue;; esac
-  grep -qE '\{\{(PROJECT_NAME|DESCRIPTION|STACK|DATE)\}\}' "$f" && warn "placeholder por substituir em $f"
+  grep -qE '\{\{(PROJECT_NAME|DESCRIPTION|STACK|DATE)\}\}' "$f" && warn "placeholder left to replace in $f"
 done <<<"$(printf '%s' "$files" | grep -E '\.md$' || true)"
 
-# 6. catálogo de módulos por preencher quando já há código
-if [[ -n "$src_code" && -f docs/MODULES.md ]] && grep -q '_a preencher_' docs/MODULES.md; then
-  warn "docs/MODULES.md ainda por preencher e já existe código em src/ (skill code-documentation)"
+# 6. module catalog still empty when there is already code
+if [[ -n "$src_code" && -f docs/MODULES.md ]] && grep -q '_to be filled in_' docs/MODULES.md; then
+  warn "docs/MODULES.md is still empty and there is already code in src/ (skill code-documentation)"
 fi
 
 echo
-if (( warns == 0 )); then echo "OK: estrutura sem avisos."; exit 0; fi
-echo "$warns aviso(s)."
+if (( warns == 0 )); then echo "OK: no structure warnings."; exit 0; fi
+echo "$warns warning(s)."
 (( STRICT )) && exit 1
 exit 0

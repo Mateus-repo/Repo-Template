@@ -1,96 +1,96 @@
 ---
 name: ui-design
-description: Desenhar e rever interfaces com qualidade profissional — hierarquia visual, espaçamento, tipografia, cor e contraste, estados de componentes, acessibilidade, movimento e consistência via design tokens em docs/DESIGN.md. Usa SEMPRE que criares, alteres ou revejas qualquer UI (web, desktop, mobile, jogos), quando o utilizador falar em visual, layout, design, tema, "ficar bonito", "melhorar a interface", ou antes de escrever código de UI. Evita interfaces genéricas, inconsistentes ou inacessíveis.
+description: Design and review interfaces to a professional standard — visual hierarchy, spacing, typography, color and contrast, component states, accessibility, motion, and consistency via design tokens in docs/DESIGN.md. ALWAYS use when you create, change, or review any UI (web, desktop, mobile, games), when the user talks about visuals, layout, design, theme, "making it pretty", "improving the interface", or before writing UI code. Avoid generic, inconsistent, or inaccessible interfaces.
 ---
 
 # UI design
 
-Uma boa UI é **clara, consistente e previsível** primeiro; bonita depois — e a beleza nasce da disciplina (escala, alinhamento, contraste), não de enfeites.
+A good UI is **clear, consistent, and predictable** first; pretty afterwards — and the beauty comes from discipline (scale, alignment, contrast), not decoration.
 
-## Processo
+## Process
 
-1. **Brief (2 min)** — quem usa, em que contexto (ecrã, rato/toque/gamepad, pressa?), qual a **tarefa principal** do ecrã, qual o **tom** (calmo, enérgico, sério, "cozy"…). Escreve em `docs/DESIGN.md › Direção`.
-2. **Tokens antes de componentes** — define cor, tipografia, espaçamento, raios, sombras, movimento em `docs/DESIGN.md`. O código usa **tokens**, nunca valores soltos ("#3a7bd5", "13px").
-3. **Estrutura antes de estilo** — esboça a hierarquia do ecrã (o que é 1.º, 2.º, 3.º) em texto/ASCII; só depois estilo.
-4. **Componentes com todos os estados** (ver §5).
-5. **Implementa** reutilizando componentes; nada de estilos "one-off" repetidos.
-6. **Revê** com a checklist (§9) e **verifica no ecrã real** (tamanhos pequeno e grande). Regista decisões em `docs/DESIGN.md › Registo`.
+1. **Brief (2 min)** — who uses it, in what context (screen, mouse/touch/gamepad, in a hurry?), what the screen's **primary task** is, and the **tone** (calm, energetic, serious, "cozy"…). Write it in `docs/DESIGN.md › Direction`.
+2. **Tokens before components** — define color, typography, spacing, radii, shadows, motion in `docs/DESIGN.md`. Code uses **tokens**, never loose values ("#3a7bd5", "13px").
+3. **Structure before style** — sketch the screen's hierarchy (what's 1st, 2nd, 3rd) in text/ASCII; style only after.
+4. **Components with all states** (see §5).
+5. **Implement** reusing components; no repeated "one-off" styles.
+6. **Review** with the checklist (§9) and **verify on the real screen** (small and large sizes). Record decisions in `docs/DESIGN.md › Log`.
 
-Se existir UI prévia, **respeita o sistema existente** (tokens, componentes, padrões) antes de introduzir algo novo.
+If prior UI exists, **respect the existing system** (tokens, components, patterns) before introducing anything new.
 
-## 1. Hierarquia
+## 1. Hierarchy
 
-- Um **ponto focal** por ecrã. Ação principal destacada (cor, tamanho, posição); secundárias discretas; destrutivas separadas e confirmadas.
-- Hierarquia por **tamanho, peso, contraste, espaço** — não por 6 cores diferentes.
-- Agrupa por proximidade (lei da proximidade): espaço **dentro** do grupo < espaço **entre** grupos.
-- Leitura natural: esquerda→direita, cima→baixo (ajusta para RTL se aplicável).
+- One **focal point** per screen. Primary action prominent (color, size, position); secondary ones understated; destructive ones separated and confirmed.
+- Hierarchy via **size, weight, contrast, space** — not via 6 different colors.
+- Group by proximity (the law of proximity): space **within** a group < space **between** groups.
+- Natural reading: left→right, top→bottom (adjust for RTL where applicable).
 
-## 2. Espaçamento e layout
+## 2. Spacing and layout
 
-- **Escala fixa** (4/8): `4 · 8 · 12 · 16 · 24 · 32 · 48 · 64`. Nunca valores arbitrários.
-- Mais espaço em branco do que parece necessário; densidade só em ferramentas de especialista.
-- **Alinha** a uma grelha/eixos comuns; margens consistentes; mesma largura máxima de leitura (45–75 caracteres por linha).
-- Responsivo/adaptável: define 2–3 *breakpoints* (ou tamanhos-alvo), conteúdo reflui, nada de scroll horizontal acidental. Em desktop/jogos: testa resolução mínima **e** ecrãs grandes/ultrawide.
+- **Fixed scale** (4/8): `4 · 8 · 12 · 16 · 24 · 32 · 48 · 64`. Never arbitrary values.
+- More white space than seems necessary; density only in expert tools.
+- **Align** to a grid/common axes; consistent margins; the same maximum reading width (45–75 characters per line).
+- Responsive/adaptable: define 2–3 *breakpoints* (or target sizes), content reflows, no accidental horizontal scrolling. On desktop/games: test the minimum resolution **and** large/ultrawide screens.
 
-## 3. Tipografia
+## 3. Typography
 
-- **1–2 famílias** no máximo; escala modular (ex.: 12 · 14 · 16 · 20 · 24 · 32).
-- Corpo ≥ 16 px equivalente (≥ 14 em UIs densas); entrelinha 1.4–1.6 para texto corrido; títulos 1.1–1.3.
-- 2–3 pesos (regular, médio, negrito). Maiúsculas só em etiquetas curtas.
-- Texto curto e acionável: botões com **verbo** ("Guardar", "Criar pedido"), erros que dizem **o que fazer**, sem jargão técnico.
+- **1–2 families** at most; modular scale (e.g. 12 · 14 · 16 · 20 · 24 · 32).
+- Body ≥ 16 px equivalent (≥ 14 in dense UIs); line height 1.4–1.6 for body text; headings 1.1–1.3.
+- 2–3 weights (regular, medium, bold). All caps only in short labels.
+- Short, actionable text: buttons with a **verb** ("Save", "Create order"), errors that say **what to do**, no technical jargon.
 
-## 4. Cor e contraste
+## 4. Color and contrast
 
-- Paleta pequena: **neutros** (fundo, superfície, bordas, texto) + **1 cor primária** + **semânticas** (sucesso/aviso/erro/info). Neutros fazem 80% do trabalho.
-- Contraste **WCAG**: texto normal ≥ 4.5:1; texto grande e elementos de UI ≥ 3:1. Verifica de facto (não "a olho").
-- **Nunca só cor** para transmitir significado (junta ícone/texto/forma).
-- Suporta tema claro/escuro se fizer sentido, via tokens (não duplicar estilos).
-- Evita preto/branco puros em grandes áreas; usa neutros ligeiramente tingidos pela cor primária.
+- Small palette: **neutrals** (background, surface, borders, text) + **1 primary color** + **semantic** (success/warning/error/info). Neutrals do 80% of the work.
+- **WCAG** contrast: normal text ≥ 4.5:1; large text and UI elements ≥ 3:1. Verify it for real (not "by eye").
+- **Never color alone** to convey meaning (add icon/text/shape).
+- Support light/dark theme where it makes sense, via tokens (don't duplicate styles).
+- Avoid pure black/white in large areas; use neutrals tinted slightly with the primary color.
 
-## 5. Estados (o que separa amador de profissional)
+## 5. States (what separates amateur from professional)
 
-Cada componente interativo define: **normal · hover · foco (visível!) · pressionado · desativado · a carregar · erro · sucesso**.
-Cada **vista de dados** define: **vazio** (com orientação/ação), **a carregar** (esqueleto/spinner), **erro** (com retry), **parcial**, **muitos dados** (paginação/scroll), **texto longo** (truncar/quebrar).
-Formulários: etiquetas visíveis (não só placeholder), validação clara junto ao campo, valores preservados em erro, estado de submissão.
+Every interactive component defines: **normal · hover · focus (visible!) · pressed · disabled · loading · error · success**.
+Every **data view** defines: **empty** (with guidance/action), **loading** (skeleton/spinner), **error** (with retry), **partial**, **lots of data** (pagination/scroll), **long text** (truncate/wrap).
+Forms: visible labels (not just placeholders), clear validation next to the field, values preserved on error, submission state.
 
-## 6. Acessibilidade (mínimos não-negociáveis)
+## 6. Accessibility (non-negotiable minimums)
 
-- Navegável por **teclado** (e gamepad, se aplicável) com ordem lógica e **foco visível**.
-- Alvos de toque/clique ≥ 44×44 px (≥ 24 px com espaçamento em desktop denso).
-- Texto alternativo em imagens significativas; etiquetas em controles; semântica correta (botão é botão, não `div`).
-- Respeita "reduzir movimento"; nada pisca > 3×/s; áudio/vídeo com controlo.
-- Texto redimensionável sem partir o layout; não bloquear zoom.
+- Navigable by **keyboard** (and gamepad, where applicable) with logical order and **visible focus**.
+- Touch/click targets ≥ 44×44 px (≥ 24 px with spacing on dense desktop).
+- Alt text on meaningful images; labels on controls; correct semantics (a button is a button, not a `div`).
+- Respect "reduce motion"; nothing blinks > 3×/s; audio/video with controls.
+- Text resizable without breaking the layout; don't block zoom.
 
-## 7. Movimento
+## 7. Motion
 
-Serve para **explicar** (de onde veio, para onde vai), não para decorar. 120–240 ms; *ease-out* para entrar, *ease-in* para sair; anima `transform`/`opacity`. Feedback imediato (< 100 ms) ao input.
+Serves to **explain** (where it came from, where it's going), not to decorate. 120–240 ms; *ease-out* to enter, *ease-in* to exit; animate `transform`/`opacity`. Immediate feedback (< 100 ms) to input.
 
-## 8. Padrões de estilo e consistência
+## 8. Style patterns and consistency
 
-- Uma única família de ícones, um raio de borda base (+1 variante), 2–3 níveis de elevação, bordas **ou** sombras (não tudo).
-- Componentes reutilizáveis: botão, campo, cartão, modal, lista, tabs, toast. Variantes por propriedades, não cópias.
-- Mesma ação = mesmo aspeto e mesmo sítio em todo o lado.
-- **Evita o genérico:** escolhe uma direção e comete-te (tipografia com carácter, paleta coerente, um detalhe memorável) — mas sem sacrificar legibilidade nem consistência.
+- One icon family, one base border radius (+1 variant), 2–3 elevation levels, borders **or** shadows (not both).
+- Reusable components: button, field, card, modal, list, tabs, toast. Variants via properties, not copies.
+- Same action = same look and same place everywhere.
+- **Avoid the generic:** pick a direction and commit to it (typography with character, a coherent palette, one memorable detail) — but without sacrificing legibility or consistency.
 
-## 9. Checklist de revisão
+## 9. Review checklist
 
-- [ ] Há um ponto focal e a ação principal é óbvia?
-- [ ] Só valores da escala de espaçamento/tipografia/tokens de cor?
-- [ ] Contraste verificado (4.5:1 / 3:1)? Sem informação só por cor?
-- [ ] Todos os estados definidos (interação **e** dados)?
-- [ ] Foco visível e uso por teclado/gamepad OK?
-- [ ] Textos curtos, claros, com verbos; erros acionáveis?
-- [ ] Testado em tamanho mínimo e grande; sem overflow/cortes?
-- [ ] Reutiliza componentes existentes; sem estilos duplicados?
-- [ ] `docs/DESIGN.md` atualizado (tokens/componentes/decisão)?
+- [ ] Is there a focal point and is the primary action obvious?
+- [ ] Only values from the spacing/typography/color-token scales?
+- [ ] Contrast verified (4.5:1 / 3:1)? No color-only information?
+- [ ] All states defined (interaction **and** data)?
+- [ ] Visible focus and keyboard/gamepad use OK?
+- [ ] Texts short, clear, with verbs; actionable errors?
+- [ ] Tested at minimum and large size; no overflow/clipping?
+- [ ] Reuses existing components; no duplicated styles?
+- [ ] `docs/DESIGN.md` updated (tokens/components/decision)?
 
-## 10. Notas por plataforma
+## 10. Platform notes
 
-- **Web:** HTML semântico, CSS variáveis para tokens, *mobile-first*, `prefers-color-scheme`/`prefers-reduced-motion`.
-- **Desktop (WinForms/WPF/Qt/Electron…):** respeita convenções do SO, DPI scaling, atalhos de teclado, estados de janela redimensionada.
-- **Mobile:** zonas de polegar, gestos com alternativa visível, *safe areas*, teclado a cobrir campos.
-- **Jogos:** legibilidade a distância/em movimento, contraste sobre fundo variável, ancoragem a cantos/safe area em ecrãs diferentes, navegação por gamepad, escala de UI configurável, feedback sonoro/visual de cada ação. Separa **dados/lógica** da **apresentação** para testar sem render.
+- **Web:** semantic HTML, CSS variables for tokens, *mobile-first*, `prefers-color-scheme`/`prefers-reduced-motion`.
+- **Desktop (WinForms/WPF/Qt/Electron…):** respect OS conventions, DPI scaling, keyboard shortcuts, resized-window states.
+- **Mobile:** thumb zones, gestures with a visible alternative, *safe areas*, keyboard covering fields.
+- **Games:** legibility at distance/in motion, contrast over varying backgrounds, anchoring to corners/safe area across different screens, gamepad navigation, configurable UI scale, audio/visual feedback for every action. Separate **data/logic** from **presentation** so you can test without rendering.
 
-## Anti-padrões
+## Anti-patterns
 
-Valores mágicos de cor/espaço · 5 tamanhos de botão · texto cinza claro sobre branco · modal sobre modal · placeholder como etiqueta · ícones sem texto em ações importantes · estados vazios em branco · animações lentas que bloqueiam o uso · "depois trato da acessibilidade".
+Magic color/spacing values · 5 button sizes · light gray text on white · modal over modal · placeholder as a label · icons without text in important actions · blank empty states · slow animations that block use · "I'll get to accessibility later".
