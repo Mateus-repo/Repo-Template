@@ -17,7 +17,7 @@ One sentence for the question. 2–4 real options (include "do nothing" and "the
 
 ## Step 2 — The 5 angles (1–3 lines each, per option when relevant)
 
-1. **Precedent** — What does the repo already do? Is there a pattern, convention, previous decision (`DECISIONS.md`, `docs/CONVENTIONS.md`, `git log`, neighbouring code)? Consistency almost always wins.
+1. **Precedent** — What does the repo already do? Is there a pattern, convention, previous decision (`DECISIONS.md`, `docs/CONVENTIONS.md`, `git log`, neighboring code)? Consistency almost always wins.
 2. **Intent** — Which user goal does this serve (`README`, `ROADMAP`, `PROGRESS`, messages, earlier answers in `QUESTIONS.md`)? Which option would they pick? What is the *spirit* of the request, not just the letter?
 3. **External evidence** — What do the official documentation, the ecosystem, benchmarks, known issues say? (skill `research-first`.) Don't assume APIs from memory.
 4. **Risk and reversibility** — Worst case if it's wrong? Cost to undo (minutes vs. days)? Does it touch data, security, money, the public API? **Cheap and reversible → decide now.**

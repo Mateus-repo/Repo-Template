@@ -6,7 +6,7 @@
 ## Quick checklist (per review)
 
 - [ ] **Correctness:** does it do what the acceptance criteria ask for? Edge cases and errors handled?
-- [ ] **Tests:** cover the new behaviour and the fixed bugs? Pass deterministically?
+- [ ] **Tests:** cover the new behavior and the fixed bugs? Pass deterministically?
 - [ ] **Design:** clear responsibilities, small modules, low coupling, no obvious duplication?
 - [ ] **Readability:** names, structure, comments only where they explain the *why*?
 - [ ] **Security:** input validated, secrets out of the repository, dependencies justified? (`security-review`)

@@ -1,6 +1,6 @@
 # ARCHITECTURE — {{PROJECT_NAME}}
 
-> How the system is organised **today** (not how we would like it to be). Update in the same commit that changes the structure.
+> How the system is organized **today** (not how we would like it to be). Update in the same commit that changes the structure.
 > If this document contradicts the code, the code wins — fix the document.
 
 ## Overview
@@ -40,7 +40,7 @@ _Core models, where and how they are stored, migrations._
 
 ## External integrations
 
-| Service/API | What for | Configuration (variables) | Failure → behaviour |
+| Service/API | What for | Configuration (variables) | Failure → behavior |
 |-------------|----------|--------------------------|------------------------|
 
 ## Relevant decisions

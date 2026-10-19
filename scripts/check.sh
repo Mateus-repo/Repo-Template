@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Full verification: detects the stack and runs lint + tests (+ build when it exists).
-# To customise: create scripts/check.local.sh (it takes full priority).
+# To customize: create scripts/check.local.sh (it takes full priority).
 # Exits with a non-zero code if something fails.
 cd "$(dirname "${BASH_SOURCE[0]}")/.." || exit 1
 

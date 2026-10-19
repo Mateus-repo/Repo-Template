@@ -32,4 +32,4 @@
 
 ## Archive
 
-_Old entries (> 20 sessions) summarised here._
+_Old entries (> 20 sessions) summarized here._

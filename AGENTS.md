@@ -45,7 +45,7 @@ If the context is compacted mid-session, repeat steps 2–4: the real state is i
 | `BUGS.md` | Known bugs and their state | Agent | When you find / fix a bug |
 | `REVIEW.md` | Self-reviews and findings | Agent | Before a milestone and after large blocks |
 | `IDEAS.md` | Out-of-scope ideas (inbox) | Agent + user | Whenever an idea shows up — **do not implement it** |
-| `ARCHITECTURE.md` | How the system is organised | Agent | When the structure changes |
+| `ARCHITECTURE.md` | How the system is organized | Agent | When the structure changes |
 | `CHANGELOG.md` | User-visible changes per version | Agent | On every relevant feature/fix |
 | `docs/CONVENTIONS.md` | Code style, naming, structure | Agent + user | When a new convention appears |
 | `docs/MODULES.md` | Catalog of reusable modules and functions (consult **before** writing code) | Agent | Whenever you create/change/remove public API |
@@ -57,7 +57,7 @@ How to write each entry: skill `project-docs`.
 
 ## 4. Autonomy protocol  ← the most important part
 
-**Goal:** work continuously and independently, typically **~2 hours straight** (default budget: 120 min; check the clock with `bash scripts/clock.sh`), until the useful work runs out or there is a **real blocker**. Deciding is the default behaviour; asking is the exception.
+**Goal:** work continuously and independently, typically **~2 hours straight** (default budget: 120 min; check the clock with `bash scripts/clock.sh`), until the useful work runs out or there is a **real blocker**. Deciding is the default behavior; asking is the exception.
 
 ### 4.1 Work loop
 
@@ -78,7 +78,7 @@ Ask for confirmations ("may I continue?"), name/structure/style choices, task or
 
 ### 4.3 When to decide on your own vs. ask
 
-Before asking the user anything, **analyse the situation from 5 different angles** (detail in skill `decide-without-asking`):
+Before asking the user anything, **analyze the situation from 5 different angles** (detail in skill `decide-without-asking`):
 
 1. **Precedent** — what does the repo, the code and the docs already do/decide?
 2. **Intent** — which user goal does this serve? What would they probably choose?
@@ -101,7 +101,7 @@ When you ask: **in a batch**, in `QUESTIONS.md`, with context, options, your def
 
 ### 4.4 When the queue runs out
 
-In this order, without inventing new scope: (1) test gaps, (2) `/review` of recent work, (3) refactoring of already-identified *code smells*, (4) `/structure` (folder organisation, documentation and reuse), (5) sync the docs with the code, (6) evaluate `IDEAS.md` — only promote to `TODO.md` what serves `ROADMAP.md`. After that, finish: `bash scripts/autopilot.sh stop "done"` and write the final summary.
+In this order, without inventing new scope: (1) test gaps, (2) `/review` of recent work, (3) refactoring of already-identified *code smells*, (4) `/structure` (folder organization, documentation and reuse), (5) sync the docs with the code, (6) evaluate `IDEAS.md` — only promote to `TODO.md` what serves `ROADMAP.md`. After that, finish: `bash scripts/autopilot.sh stop "done"` and write the final summary.
 
 ### 4.5 Scope control
 
@@ -124,7 +124,7 @@ New ideas, "while we're at it…" and side improvements go to `IDEAS.md`. Do not
 - **Tests** for non-trivial logic and for every fixed bug (a regression test first, when possible).
 - **No secrets in the repo.** Configuration through environment variables / ignored files; keep `.env.example` up to date.
 - **Dependencies:** add them only when they pay off; record it in `DECISIONS.md` if it is a relevant dependency.
-- **Small and reversible changes** > large rewrites. Never mix a refactor with a behaviour change in the same commit.
+- **Small and reversible changes** > large rewrites. Never mix a refactor with a behavior change in the same commit.
 
 ## 6. Git
 
@@ -161,7 +161,7 @@ A task is only done when: the acceptance criteria are met **with evidence** · `
 | `planning` | Turning a goal into tasks with acceptance criteria |
 | `auto-commit` | Committing, messages, checkpoints, secrets |
 | `testing-verification` | Verifying that something is really done |
-| `debugging` | A bug, failing test, unexpected behaviour |
+| `debugging` | A bug, failing test, unexpected behavior |
 | `refactoring-modular` | Code getting large/coupled; reorganising |
 | `reusable-modules` | Before creating a function/module; designing reusable APIs; copy-paste |
 | `project-structure` | Creating folders/files; you do not know where something goes; reorganising |

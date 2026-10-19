@@ -1,6 +1,6 @@
 # QUESTIONS — {{PROJECT_NAME}}
 
-> Questions for the **user**. Only **(real) blockers** go here (see `AGENTS.md` §4.3) — after the 5 angles have been analysed.
+> Questions for the **user**. Only **(real) blockers** go here (see `AGENTS.md` §4.3) — after the 5 angles have been analyzed.
 > The agent asks **in batches**, gives a **default recommendation** and keeps working on what does not depend on the answer.
 > **User:** reply under `Answer:` (one line is enough). The agent reads them at startup.
 

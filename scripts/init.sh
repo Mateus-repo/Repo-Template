@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Usage: bash scripts/init.sh "Project Name" "Short description" "Stack"
-# Replaces placeholders, initialises git and makes the first commit.
+# Replaces placeholders, initializes git and makes the first commit.
 set -euo pipefail
 
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
@@ -36,7 +36,7 @@ mkdir -p src && touch src/.gitkeep
 
 if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   git init -q -b main 2>/dev/null || { git init -q && git checkout -q -b main; }
-  echo "Git repository initialised."
+  echo "Git repository initialized."
 fi
 
 if [[ -n "$(git status --porcelain)" ]]; then

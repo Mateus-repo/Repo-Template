@@ -10,7 +10,7 @@ bash scripts/init.sh "My Project" "Short description" "Stack (e.g. TypeScript + 
 opencode
 ```
 
-`init.sh` replaces the placeholders (`{{PROJECT_NAME}}`, `{{DESCRIPTION}}`, `{{STACK}}`, `{{DATE}}`), initialises git if needed, moves this guide to `docs/TEMPLATE_GUIDE.md` and makes the first commit.
+`init.sh` replaces the placeholders (`{{PROJECT_NAME}}`, `{{DESCRIPTION}}`, `{{STACK}}`, `{{DATE}}`), initializes git if needed, moves this guide to `docs/TEMPLATE_GUIDE.md` and makes the first commit.
 
 Then, inside OpenCode:
 
@@ -22,7 +22,7 @@ Then, inside OpenCode:
 
 - **Startup:** reads `AGENTS.md`, `PROGRESS.md`, `QUESTIONS.md`, `TODO.md`, `ROADMAP.md`.
 - **Loop:** choose a task → plan → implement → verify → record → commit → repeat.
-- **Autonomy:** it only stops for real blockers. Before asking, it analyses the doubt from **5 angles** (precedent, intent, external evidence, risk/reversibility, simplicity) and decides, recording it in `DECISIONS.md`.
+- **Autonomy:** it only stops for real blockers. Before asking, it analyzes the doubt from **5 angles** (precedent, intent, external evidence, risk/reversibility, simplicity) and decides, recording it in `DECISIONS.md`.
 - **Questions:** go to `QUESTIONS.md` (in a batch, with a default recommendation). **Answer below the question** in the file, or in the chat; the agent reads it next session.
 - **Ideas:** go to `IDEAS.md`; they do not become code without moving to `TODO.md`/`ROADMAP.md`.
 
@@ -40,7 +40,7 @@ Then, inside OpenCode:
 | `/structure [scope]` | Audits folders, documentation and reuse, and fixes them |
 | `/module <name>` | Creates a new module (public API, README, tests) and registers it |
 | `/commit` | Organised commit of pending work |
-| `/handoff` | Closes the session: updates docs and summarises |
+| `/handoff` | Closes the session: updates docs and summarizes |
 | `/status` | Quick summary of the project state |
 
 ## 4. Auto commit
@@ -77,7 +77,7 @@ If the plugin API changes and the plugin stops working, the rest stays valid: th
 
 ## 7. Structure, documentation and reuse
 
-The template pushes the agent to write **modular and reusable** code, well organised and documented:
+The template pushes the agent to write **modular and reusable** code, well organized and documented:
 
 - **Skills:** `reusable-modules` (reuse before writing; pure functions; minimal API; the 1-2-3 rule), `project-structure` (where each thing lives; by feature; moving safely) and `code-documentation` (docstrings, per-module README, comments only for the why).
 - **Catalog:** `docs/MODULES.md` lists reusable modules and functions. The agent consults it (and runs `scripts/find-reuse.sh`) before writing new code, and updates it in the same commit.

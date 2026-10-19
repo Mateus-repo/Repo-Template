@@ -105,7 +105,7 @@ export default Plugin.define({
         const hit = added.some((l) => SECRET_PATTERNS.some((re) => re.test(l)))
         if (hit) {
           await git("reset", "-q")
-          log("warn", "possible secret in the diff — checkpoint cancelled. Remove the secret and try again.")
+          log("warn", "possible secret in the diff — checkpoint canceled. Remove the secret and try again.")
           return
         }
       }

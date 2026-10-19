@@ -7,7 +7,7 @@ Write for **humans**: what changed for people who use it, not internal details.
 
 ### Added
 - Initial project structure.
-- Rules for modularity, reuse, folder organisation and documentation (see `docs/MODULES.md`).
+- Rules for modularity, reuse, folder organization and documentation (see `docs/MODULES.md`).
 
 ### Changed
 

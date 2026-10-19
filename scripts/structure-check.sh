@@ -47,7 +47,7 @@ vague="$(printf '%s' "$files" | awk -F/ '{for(i=1;i<NF;i++) print $i}' | sort -u
   | grep -Ei '^(utils?|helpers?|misc|stuff|temp|tmp|new|old|final|copy|backup|test2)$' || true)"
 while IFS= read -r d; do
   [[ -z "$d" ]] && continue
-  warn "folder '$d': vague/junk-drawer name — organise by concept (skill project-structure)"
+  warn "folder '$d': vague/junk-drawer name — organize by concept (skill project-structure)"
 done <<<"$vague"
 
 # 4. backup / copy files

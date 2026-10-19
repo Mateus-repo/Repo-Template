@@ -19,7 +19,7 @@ _To be filled in._
 
 ## Milestone status
 
-Legend: `⬜ not started` · `🟦 in progress` · `✅ done` · `⏸ paused` · `❌ cancelled`
+Legend: `⬜ not started` · `🟦 in progress` · `✅ done` · `⏸ paused` · `❌ canceled`
 
 | # | Milestone | Status | Measurable goal |
 |---|-----------|--------|---------------------|
